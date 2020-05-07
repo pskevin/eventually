@@ -1,0 +1,1 @@
+Integrating Cassandra with MXNet to test Quorum-based consistency of parameter servers.
