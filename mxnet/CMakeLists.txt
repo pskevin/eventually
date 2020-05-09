@@ -640,26 +640,26 @@ if(MSVC)
 endif()
 
 # Cassandra build
-if(USE_DIST_KVSTORE)
-message("Finding cassandra header and library")
-  set(ALT_PATH "/usr/local")
-  find_path(
-      CASS_H cassandra.h
-      PATHS ${ALT_PATH}/include
-  )
-  find_library(
-      CASS_LIB cassandra 
-      PATHS ${ALT_PATH}/bin
-  )
+# if(USE_DIST_KVSTORE)
+# message("Finding cassandra header and library")
+#   set(ALT_PATH "/usr/local")
+#   find_path(
+#       CASS_H cassandra.h
+#       PATHS ${ALT_PATH}/include
+#   )
+#   find_library(
+#       CASS_LIB cassandra 
+#       PATHS ${ALT_PATH}/bin
+#   )
 
-  if(CASS_H)
-    message("Cassandra header file found at - ${CASS_H}")
-  endif()
+#   if(CASS_H)
+#     message("Cassandra header file found at - ${CASS_H}")
+#   endif()
 
-  if(CASS_LIB)
-    message("Cassandra library executable found at - ${CASS_LIB}")
-  endif()
-endif()
+#   if(CASS_LIB)
+#     message("Cassandra library executable found at - ${CASS_LIB}")
+#   endif()
+# endif()
 
 # Add cmake targets
 add_subdirectory("3rdparty/mshadow")
@@ -673,12 +673,12 @@ if(UNIX)
   list(APPEND MXNET_INSTALL_TARGETS mxnet_static)
   add_library(mxnet_static STATIC ${SOURCE})
   
-  target_include_directories(mxnet_static PUBLIC ${CASS_H})
+  # target_include_directories(mxnet_static PUBLIC ${CASS_H})
  
   target_link_libraries(
     mxnet_static
     PUBLIC mshadow
-    PUBLIC ${CASS_LIB}
+    # PUBLIC ${CASS_LIB}
   )
   target_compile_definitions(mxnet_static PUBLIC DMLC_LOG_FATAL_THROW=$<BOOL:${LOG_FATAL_THROW}>)
   add_library(mxnet SHARED ${DUMMY_SOURCE})
