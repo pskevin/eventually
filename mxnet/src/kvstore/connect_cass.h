@@ -2,16 +2,10 @@
 /* Use "#include <dse.h>" when connecting to DataStax Enterpise */
 #include <stdio.h>
 
-int main()
+CassFuture* connect_to_cassandra(CassSession *session, CassCluster *cluster)
 {
     /* Setup and connect to cluster */
     CassFuture *connect_future = NULL;
-    CassCluster *cluster = cass_cluster_new();
-    cass_cluster_set_protocol_version(cluster, CASS_PROTOCOL_VERSION_V4);
-    CassSession *session = cass_session_new();
-
-    /* Add contact points */
-    cass_cluster_set_contact_points(cluster, "127.0.0.1");
 
     /* Provide the cluster object as configuration to connect the session */
     connect_future = cass_session_connect(session, cluster);
@@ -28,11 +22,5 @@ int main()
         fprintf(stderr, "Connect error: '%.*s'\n", (int)message_length, message);
     }
 
-    /* Run queries... */
-
-    cass_future_free(connect_future);
-    cass_session_free(session);
-    cass_cluster_free(cluster);
-
-    return 0;
+    return connect_future;
 }
