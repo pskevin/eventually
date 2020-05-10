@@ -197,6 +197,9 @@ struct Meta {
   int data_size = 0;
   /** \brief message priority */
   int priority = 0;
+  SArray<int> server_epochs = {};
+  int epoch = 0;
+  int rank = 0;
 };
 /**
  * \brief messages that communicated amaong nodes.

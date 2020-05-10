@@ -24,6 +24,7 @@ from .. import optimizer as opt
 from ..model import _create_kvstore, _create_sparse_kvstore
 from .parameter import ParameterDict, Parameter
 from ..kvstore import KVStore
+from .. import nd
 
 
 class Trainer(object):
@@ -115,6 +116,8 @@ class Trainer(object):
         self._kvstore_params = {'kvstore': kvstore, 'update_on_kvstore': update_on_kvstore}
         self._kv_initialized = False
         self._kvstore = None
+        self.epoch = 0
+        self.server_epochs = []
         self._update_on_kvstore = None
         self._distributed = None
         self._params_to_init = []
@@ -157,6 +160,7 @@ class Trainer(object):
                                      "when KVStore is not initialized."
         params_to_init = []
         if self._kvstore:
+            self.server_epochs = [nd.zeros(self._kvstore.num_workers, dtype='int32') for _ in range(len(self._params))]
             for param in self._params_to_init:
                 if param._deferred_init:
                     params_to_init.append(param)
@@ -326,7 +330,7 @@ class Trainer(object):
                                   'is used.')
         self._optimizer.rescale_grad = scale
 
-    def step(self, batch_size, ignore_stale_grad=False):
+    def step(self, batch_size, ignore_stale_grad=False, epoch=0):
         """Makes one step of parameter update. Should be called after
         `autograd.backward()` and outside of `record()` scope.
 
@@ -346,12 +350,11 @@ class Trainer(object):
         """
         rescale_grad = self._scale / batch_size
         self._check_and_rescale_grad(rescale_grad)
-
+        self.epoch = epoch
         if not self._kv_initialized:
             self._init_kvstore()
         if self._params_to_init:
             self._init_params()
-
         self._allreduce_grads()
         self._update(ignore_stale_grad)
 
@@ -398,8 +401,13 @@ class Trainer(object):
                 else:
                     # allreduce dense gradients if not update_on_kvstore,
                     # otherwise push dense gradients, pull dense weights
+                    
+                    sepochs=self.server_epochs[i]
                     if self._update_on_kvstore:
-                        self._kvstore.pushpull(i, grad_list, out=param.list_data(), priority=-i)
+                        self._kvstore.pushpull(i, grad_list, out=param.list_data(), priority=-i, epoch=self.epoch, server_epochs=self.server_epochs[i], out_server_epochs=sepochs)
+                        if (sepochs.size!=0):
+                            self.server_epochs[i] = sepochs
+                            print("sepch updated", sepochs.asnumpy())
                     else:
                         self._kvstore.pushpull(i, grad_list, priority=-i)
 

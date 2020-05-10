@@ -21,13 +21,14 @@
 import pickle
 import ctypes
 import os
+import time
 from ..ndarray import NDArray
 from ..ndarray import _ndarray_cls
 from ..base import _LIB, c_str
 from ..base import check_call, mx_uint, py_str
 from ..base import NDArrayHandle, KVStoreHandle
 from .. import optimizer as opt
-from .base import _ctype_key_value, _ctype_dict, KVStoreBase
+from .base import _ctype_key_value, _ctype_dict, _ctype_ndarr, KVStoreBase
 
 __all__ = ['KVStore']
 
@@ -72,7 +73,7 @@ class KVStore(KVStoreBase):
     def __del__(self):
         check_call(_LIB.MXKVStoreFree(self.handle))
 
-    def broadcast(self, key, value, out, priority=0):
+    def broadcast(self, key, value, out, priority=0):#, epoch=0, server_epochs=[],out_server_epochs=None, priority=0):
         """ Broadcast the `value` NDArray at rank 0 to all ranks,
         and store the result in `out`.
 
@@ -107,15 +108,25 @@ class KVStore(KVStoreBase):
         """
         cvkeys, cvals, use_str_keys = _ctype_key_value(key, value)
         cokeys, couts, _ = _ctype_key_value(key, out)
+        # cserver_epochs = _ctype_arr(server_epochs)
+        # if out_server_epochs is not None:
+        #     cout_server_epochs = _ctype_arr(out_server_epochs)
+        # else:
+        #     cout_server_epochs = cserver_epochs
+        # print(server_epochs)
+        # print(cserver_epochs)
+        # print(cvkeys)
 
         if use_str_keys:
+            print("Using string keys - not made changes for")
             check_call(_LIB.MXKVStoreBroadcastEx(
                 self.handle, mx_uint(len(cvkeys)), cvkeys, mx_uint(len(cokeys)), cokeys,
                 cvals, couts, ctypes.c_int(priority)))
         else:
+            print("using int keys, on the right path")
             check_call(_LIB.MXKVStoreBroadcast(
                 self.handle, mx_uint(len(cvkeys)), cvkeys, mx_uint(len(cokeys)), cokeys,
-                cvals, couts, ctypes.c_int(priority)))
+                cvals, couts, ctypes.c_int(priority)))#, ctypes.c_int(epoch), cserver_epochs, cout_server_epochs, mx_uint(len(server_epochs)), ctypes.c_int(self.rank) ))
 
 
     def is_capable(self, capability):
@@ -253,6 +264,8 @@ class KVStore(KVStoreBase):
         >>> print b
         <RowSparseNDArray 2x3 @cpu(0)>
         """
+        # print(key)
+        # print(value)
         ckeys, cvals, use_str_keys = _ctype_key_value(key, value)
         if use_str_keys:
             check_call(_LIB.MXKVStorePushEx(
@@ -337,7 +350,7 @@ class KVStore(KVStoreBase):
                                                     cvals, ctypes.c_int(priority),
                                                     ctypes.c_bool(ignore_sparse)))
 
-    def pushpull(self, key, value, out=None, priority=0):
+    def pushpull(self, key, value, out=None, priority=0, epoch=0, server_epochs=[], out_server_epochs=None):
         """ Performs push and pull a single value or a sequence of values from the store.
 
         This function is coalesced form of push and pull operations. This function returns
@@ -401,21 +414,30 @@ class KVStore(KVStoreBase):
         [ 4.  4.  4.]]
 
         """
+        print(f"Worker: {self.rank}, epoch {epoch}, vclock {server_epochs.asnumpy()}")
         cvkeys, cvals, use_str_keys = _ctype_key_value(key, value)
+        cserver_epochs = _ctype_ndarr(server_epochs)
         if out is not None:
             cokeys, couts, _ = _ctype_key_value(key, out)
         else:
             cokeys = cvkeys
             couts = cvals
+        
+        if out_server_epochs is not None:
+            cout_server_epochs = _ctype_ndarr(out_server_epochs)
+        else:
+            cout_server_epochs = cserver_epochs
 
         if use_str_keys:
             check_call(_LIB.MXKVStorePushPullEx(
                 self.handle, mx_uint(len(cvkeys)), cvkeys, mx_uint(len(cokeys)), cokeys,
                 cvals, couts, ctypes.c_int(priority)))
         else:
+            # if self.rank == 0:
+            #     time.sleep(20)
             check_call(_LIB.MXKVStorePushPull(
                 self.handle, mx_uint(len(cvkeys)), cvkeys, mx_uint(len(cokeys)), cokeys,
-                cvals, couts, ctypes.c_int(priority)))
+                cvals, couts, ctypes.c_int(priority), ctypes.c_int(epoch), cserver_epochs, cout_server_epochs, mx_uint(len(server_epochs)), ctypes.c_int(self.rank) ))
 
     def row_sparse_pull(self, key, out=None, priority=0, row_ids=None):
         """ Pulls a single RowSparseNDArray value or a sequence of RowSparseNDArray values \

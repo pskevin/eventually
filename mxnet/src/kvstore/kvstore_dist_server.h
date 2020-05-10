@@ -38,9 +38,7 @@
 #include "../profiler/profiler.h"
 #include "../operator/tensor/elemwise_binary_op-inl.h"
 #include "../operator/tensor/init_op.h"
-
-// #include "connect_cass.h"
-#include "cassandra.h"
+#define MAX_WORKERS 20
 
 namespace mxnet {
 namespace kvstore {
@@ -100,83 +98,7 @@ class Executor {
   /**
    * \brief start the executor
    */
-//   void connect_cass() {
-//    CassFuture *connect_future = NULL;
-//     CassCluster *cluster = cass_cluster_new();
-//     cass_cluster_set_protocol_version(cluster, CASS_PROTOCOL_VERSION_V4);
-//     CassSession *session = cass_session_new();
-    
-//     char *hosts = "127.0.0.1";
-
-//     /* Add contact points */
-//     cass_cluster_set_contact_points(cluster, hosts);
-
-//     /* Provide the cluster object as configuration to connect the session */
-//     connect_future = connect_to_cassandra(session, cluster);
-
-//     if (cass_future_error_code(connect_future) == CASS_OK)
-//     {
-//         CassFuture *close_future = NULL;
-
-//         /* Build statement and execute query */
-//         const char *query = "SELECT release_version FROM system.local";
-//         CassStatement *statement = cass_statement_new(query, 0);
-
-//         CassFuture *result_future = cass_session_execute(session, statement);
-
-//         if (cass_future_error_code(result_future) == CASS_OK)
-//         {
-//             /* Retrieve result set and get the first row */
-//             const CassResult *result = cass_future_get_result(result_future);
-//             const CassRow *row = cass_result_first_row(result);
-
-//             if (row)
-//             {
-//                 const CassValue *value = cass_row_get_column_by_name(row, "release_version");
-
-//                 const char *release_version;
-//                 size_t release_version_length;
-//                 cass_value_get_string(value, &release_version, &release_version_length);
-//                 printf("release_version: '%.*s'\n", (int)release_version_length, release_version);
-//             }
-
-//             cass_result_free(result);
-//         }
-//         else
-//         {
-//             /* Handle error */
-//             const char *message;
-//             size_t message_length;
-//             cass_future_error_message(result_future, &message, &message_length);
-//             fprintf(stderr, "Unable to run query: '%.*s'\n", (int)message_length, message);
-//         }
-
-//         cass_statement_free(statement);
-//         cass_future_free(result_future);
-
-//         /* Close the session */
-//         close_future = cass_session_close(session);
-//         cass_future_wait(close_future);
-//         cass_future_free(close_future);
-//     }
-//     else
-//     {
-//         /* Handle error */
-//         const char *message;
-//         size_t message_length;
-//         cass_future_error_message(connect_future, &message, &message_length);
-//         fprintf(stderr, "Unable to connect: '%.*s'\n", (int)message_length, message);
-//     }
-
-//     cass_future_free(connect_future);
-//     cass_cluster_free(cluster);
-//     cass_session_free(session);
-
-// }
-
   void Start() {
-    // printf("\n\n\nTESTING\n\n\n");
-    // connect_cass();
     std::unique_lock<std::mutex> lk(mu_);
     while (true) {
       cond_.wait(lk, [this]{return !queue_.empty();});
@@ -425,12 +347,38 @@ class KVStoreDistServer {
   inline void ApplyUpdates(const DataHandleType type, const int key,
                            const ps::KVPairs<char>& req_data, UpdateBuf *update_buf,
                            ps::KVServer<char>* server) {
+    std::cout<<"Sync mode: "<<sync_mode_<<std::endl;
     if (!sync_mode_ || update_buf->request.size() == (size_t) ps::NumWorkers()) {
       // let the main thread to execute updater_, which is necessary for python
       auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
       auto& update =  sync_mode_ ? update_buf->merged : update_buf->temp_array;
+      auto& requests = update_buf->request;
+      size_t csize = clock_.shape().Size();
+      int* cdata = static_cast<int*>(clock_.data().dptr_);
+      auto clock_vals = new ps::SArray<int>(cdata, csize, false);
+      int num_workers = ps::Postoffice::Get()->num_workers();
+      auto local_clock = new std::vector<int>(num_workers);
+
       if (updater_) {
-        exec_.Exec([this, key, &update, &stored](){
+        exec_.Exec([this, key, &update, &stored, &requests, clock_vals, local_clock, num_workers]() mutable {
+          int staleness = 0;
+          for (const auto& req : requests) {
+            int worker = req.rank;
+            std::cout<<"For worker "<<worker<<std::endl;
+            for (int i=0; i<num_workers; i++) {
+              std::cout<<"server, worker clock: "<< (*clock_vals)[i] << ", " << req.server_epochs[i]<<std::endl;
+              staleness += (*clock_vals)[i] - req.server_epochs[i];
+            }
+            std::cout<<"Cumulative staleness for worker "<<worker<<": "<<staleness<<std::endl;
+          }
+          for (const auto& req : requests) {
+            int worker = req.rank;
+            (*clock_vals)[worker] = req.epoch + 1;
+          }
+          for (int i=0; i<num_workers; i++) {
+            (*local_clock)[i] = (*clock_vals)[i];
+          }
+          // TODO Divide update by staleness here.
           CHECK(updater_);
           updater_(key, update, &stored);
         });
@@ -456,9 +404,23 @@ class KVStoreDistServer {
         // if there is a pull request, perform WaitToRead() once before DefaultStorageResponse
         if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
         stored.WaitToRead();
+        std::cout<<"New vector clock [";
+        for (int i=0; i<num_workers; i++) {
+          std::cout<<(*local_clock)[i]<<" ";
+        }
+        std::cout<<"]"<<std::endl;
         for (const auto& req : update_buf->request) {
           if (req.pull) {
-            DefaultStorageResponse(type, key, req, req_data, server);
+            auto getNewMeta = [this, req, num_workers, local_clock]() {
+              ps::KVMeta new_req = req;
+              for (int i=0; i<num_workers; i++) {
+                new_req.server_epochs[i] = (*local_clock)[i];
+              }
+              return new_req;
+            };
+            const ps::KVMeta new_req = getNewMeta();
+            std::cout<<"Sending updated value of clock"<<std::endl;
+            DefaultStorageResponse(type, key, new_req, req_data, server);
           }
         }
         update_buf->request.clear();
@@ -781,10 +743,18 @@ class KVStoreDistServer {
     }
     int key = DecodeKey(req_data.keys[0]);
     auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
+    int worker = req_meta.rank;
+    int worker_epoch = req_meta.epoch;
+    ps::SArray<int> worker_clock = req_meta.server_epochs;
+    // std::cout<<"worker_clock length is "<<worker_clock.size()<<" for worker "<<worker<<std::endl;
+    // for (int i=0; i<worker_clock.size(); i++) {
+    //   std::cout<<"val "<<i<<" = "<<worker_clock[i]<<std::endl;
+    // }
     // there used several WaitToRead, this is because \a recved's memory
     // could be deallocated when this function returns. so we need to make sure
     // the operators with \a NDArray are actually finished
     if (req_meta.push) {
+      // std::cout<<"Size of clock_ : "<<clock_.size()<<std::endl;
       size_t ds[] = {(size_t) req_data.lens[0] / mshadow::mshadow_sizeof(type.dtype)};
       mxnet::TShape dshape(ds, ds + 1);
       TBlob recv_blob;
@@ -792,11 +762,16 @@ class KVStoreDistServer {
         recv_blob = TBlob(reinterpret_cast<DType*>(req_data.vals.data()), dshape, cpu::kDevMask);
       })
       NDArray recved = NDArray(recv_blob, 0);
+      // std::cout<<"Processesing push 1"<<std::endl;
       if (stored.is_none()) {
+        // std::cout<<"none stored push 2"<<std::endl;
         // initialization
         stored = NDArray(dshape, Context(), false,
                          has_multi_precision_copy(type) ? mshadow::kFloat32 : type.dtype);
         CopyFromTo(recved, &stored, 0);
+        TShape tshape = TShape(1,ps::Postoffice::Get()->num_workers());
+        clock_ = NDArray(tshape, Context(), false, mshadow::kInt32);
+        clock_ = 0;
         server->Response(req_meta);
         if (has_multi_precision_copy(type)) {
           auto& stored_dtype = store_[key];
@@ -806,6 +781,7 @@ class KVStoreDistServer {
         }
         stored.WaitToRead();
       } else {
+        // std::cout<<"stored push 3"<<std::endl;
         auto &updates = update_buf_[key];
         if (sync_mode_ && updates.merged.is_none()) {
           updates.merged = NDArray(dshape, Context(), false,
@@ -833,10 +809,12 @@ class KVStoreDistServer {
             updates.merged += recved;
           }
         }
+        // std::cout<<"pushing request push 4"<<std::endl;
         updates.request.push_back(req_meta);
         ApplyUpdates(type, key, req_data, &updates, server);
       }
     } else {
+      std::cout<<"Server pull, calling defstorageresp 1"<<std::endl;
       DefaultStorageResponse(type, key, req_meta, req_data, server);
     }
   }
@@ -859,6 +837,12 @@ class KVStoreDistServer {
    */
   std::unordered_map<int, NDArray> store_;
   std::unordered_map<int, NDArray> store_realt_;
+
+  /**
+   * \brief clock_ contains the value of last serviced worker iteration
+   */
+  NDArray clock_;
+  // ps::SArray<int> clock_;
 
   /**
    * \brief merge_buf_ is a buffer used if sync_mode is true. It represents

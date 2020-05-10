@@ -1,0 +1,4536 @@
+Namespace(command=['python -u /home/cc/cifar10_dist/cifar10_dist.py'], env=[], env_server=[], env_worker=[], hostfile='hosts', launcher='ssh', num_servers=1, num_workers=2, p3=False, sync_dst_dir='/home/cc/cifar10_dist')
+Namespace(archives=[], auto_file_cache=True, cluster='ssh', command=['python -u /home/cc/cifar10_dist/cifar10_dist.py'], env=[], files=[], hdfs_tempdir='/tmp', host_file='hosts', host_ip=None, jobname=None, kube_namespace='default', kube_server_image='mxnet/python', kube_server_template=None, kube_worker_image='mxnet/python', kube_worker_template=None, local_num_attempt=0, log_file=None, log_level='INFO', mesos_master=None, num_servers=1, num_workers=2, queue='default', server_cores=1, server_memory='1g', server_memory_mb=1024, sge_log_dir=None, ship_libcxx=None, slurm_server_nodes=None, slurm_worker_nodes=None, sync_dst_dir='/home/cc/cifar10_dist', worker_cores=1, worker_memory='1g', worker_memory_mb=1024, yarn_app_classpath=None, yarn_app_dir='/home/cc/mxnet/tools/../3rdparty/dmlc-core/tracker/dmlc_tracker/../yarn')
+creating--------
+creating--------
+epoch---------------
+checkpnt--------
+epoch---------------
+checkpnt--------
+Epoch
+Epoch
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of local
+
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of local
+
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of local
+Server pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of localusing int keys, on the right path
+
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of local
+
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of local
+
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of localServer pull, calling defstorageresp 1
+
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of localInside bcast of local
+
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Server pull, calling defstorageresp 1Inside bcast of local
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of localServer pull, calling defstorageresp 1
+
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+using int keys, on the right path
+Inside bcast of local
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+using int keys, on the right path
+Inside bcast of local
+using int keys, on the right path
+Inside bcast of local
+Worker: 1, epoch 0, vclock [0 0]
+Worker: 0, epoch 0, vclock [0 0]
+Server pull, calling defstorageresp 1
+Sync mode: 0
+For worker 0
+server, worker clock: 0, 0
+server, worker clock: 0, 0
+Cumulative staleness for worker 0: 0
+New vector clock [1 0 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 0
+server, worker clock: 0, 0
+Cumulative staleness for worker 1: 1
+New vector clock [1 1 ]
+Sending updated value of clock
+Server pull, calling defstorageresp 1
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Server pull, calling defstorageresp 1
+Server pull, calling defstorageresp 1
+sepch updated [1 0]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 0
+Cumulative staleness for worker 0: 1
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+New vector clock [1 1 ]
+Sending updated value of clock
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1sepch updated [1 1]
+
+server, worker clock: 1Worker: 0, epoch 0, vclock [0 0]
+, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+sepch updated [1 1]
+Worker: 0, epoch 0, vclock [0 0]
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+Worker: 1, epoch 0, vclock [0 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 0
+New vector clock [1 1 ]
+Sending updated value of clock
+sepch updated [1 1]
+trained batch %d 1
+sepch updated [1 1]
+trained batch %d 1
+Worker: 0, epoch 1, vclock [1 0]
+Sync mode: 0
+For worker 0
+server, worker clock: 1, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+Worker: 0, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 1, 1
+Cumulative staleness for worker 0: 0
+New vector clock [2 1 ]
+Sending updated value of clock
+sepch updated [2 1]
+trained batch %d 2
+Worker: 0, epoch 2, vclock [2 1]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 1
+server, worker clock: 1, 1
+Cumulative staleness for worker 1: 1
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+New vector clock [2 2 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+Worker: 1, epoch 1, vclock [1 1]
+Sync mode: 0
+For worker 1
+server, worker clock: 2, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 0
+New vector clock [2 2 ]
+Sending updated value of clock
+sepch updated [2 2]
+trained batch %d 2
+Sync mode: 0
+For worker 0
+server, worker clock: 2, 2
+server, worker clock: 2, 1
+Cumulative staleness for worker 0: 1
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+Worker: 0, epoch 2, vclock [2 1]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [3 2 ]
+Sending updated value of clock
+sepch updated [3 2]
+trained batch %d 3
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 3, 3
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [4 2 ]
+Sending updated value of clock
+sepch updated [4 2]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [4 2 ]
+Sending updated value of clock
+sepch updated [4 2]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+New vector clock [4 2 ]
+Sending updated value of clock
+sepch updated [4 2]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 2, 2
+Cumulative staleness for worker 0: 0
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 2 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 2
+server, worker clock: 2, 2
+Cumulative staleness for worker 1: 2
+sepch updated [4 2]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 2
+Cumulative staleness for worker 0: 1
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker sepch updated [4 3]
+0
+Worker: 1, epoch 2, vclock [2 2]
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker sepch updated [4 3]
+0
+Worker: 1, epoch 2, vclock [2 2]
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, sepch updated [4 3]
+4
+server, worker clock: 3, 3Worker: 0, epoch 3, vclock [3 2]
+
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: sepch updated [4 3]
+4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker Worker: 0, epoch 3, vclock [3 2]
+1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker sepch updated [4 3]
+1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4sepch updated [4 3]
+, 4
+Worker: 0, epoch 3, vclock [3 2]
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1sepch updated [4 3]
+
+Worker: 0, epoch 3, vclock [3 2]
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [4 3]
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+sepch updated [4 3]
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 0, epoch 3, vclock [3 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 0
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 0: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+sepch updated [4 3]
+trained batch %d 4
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+New vector clock [4 3 ]
+Sending updated value of clock
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+Worker: 1, epoch 2, vclock [2 2]
+Sync mode: 0
+For worker 1
+server, worker clock: 4, 4
+server, worker clock: 3, 3
+Cumulative staleness for worker 1: 0
+New vector clock [4 3 ]
+Sending updated value of clock
+sepch updated [4 3]
+trained batch %d 3
+Worker: 0, epoch 4, vclock [4 2]

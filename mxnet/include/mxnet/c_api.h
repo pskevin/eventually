@@ -2908,6 +2908,8 @@ MXNET_DLL int MXKVStorePullRowSparseEx(KVStoreHandle handle,
  * \param vals the list of values
  * \param outs the list of outputs
  * \param priority the priority of the action
+ * \param epoch the iteration of worker
+ * \param server_epochs the iterations which last server contacted saw
  * \return 0 when success, -1 when failure happens
  */
 MXNET_DLL int MXKVStoreBroadcast(KVStoreHandle handle,
@@ -2950,6 +2952,8 @@ MXNET_DLL int MXKVStoreBroadcastEx(KVStoreHandle handle,
  * \param vals the list of values
  * \param outs the list of outputs
  * \param priority the priority of the action
+ * \param epoch the iteration of worker
+ * \param server_epochs the iterations which last server contacted saw
  * \return 0 when success, -1 when failure happens
  */
 MXNET_DLL int MXKVStorePushPull(KVStoreHandle handle,
@@ -2959,7 +2963,12 @@ MXNET_DLL int MXKVStorePushPull(KVStoreHandle handle,
                                 const int* okeys,
                                 NDArrayHandle* vals,
                                 NDArrayHandle* outs,
-                                int priority);
+                                int priority,
+                                int epoch,
+                                NDArrayHandle* server_epochs,
+                                NDArrayHandle* out_server_epochs,
+                                mx_uint snum,
+                                int rank);
 /*!
  * \brief push and pull a list of (key, value) pairs from the kvstore,
  * where each key is a string

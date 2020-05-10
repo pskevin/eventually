@@ -81,7 +81,7 @@ class P3StoreDist : public KVStoreDist {
   }
 
   void PushDefault(int key, const NDArray &send_buf, const PSKV& pskv,
-                   int priority) override {
+                   int priority, int epoch, const std::vector<int>& server_epochs = std::vector<int>(), int rank=0) override {
     auto push_to_servers = [this, key, pskv, send_buf, priority]
       (RunContext rctx, Engine::CallbackOnComplete cb) {
         const int dtype = send_buf.dtype();
@@ -122,7 +122,8 @@ class P3StoreDist : public KVStoreDist {
     LOG(FATAL) << "NotImplementedError: PushRowSparse not implemented in P3StoreDist.";
   }
 
-  void PullDefault(int key, const NDArray &recv_buf, int priority) override {
+  void PullDefault(int key, const NDArray &recv_buf, int priority,
+                  int epoch=0, const std::vector<int>& server_epochs = std::vector<int>(), int rank=0) override {
     CHECK(gradient_compression_->get_type() == CompressionType::kNone)
        << "Gradient compression not supported in P3StoreDist.";
     auto pull_from_servers = [this, key, recv_buf, priority](
@@ -168,7 +169,8 @@ class P3StoreDist : public KVStoreDist {
     LOG(FATAL) << "NotImplementedError: PullRowSparse not implemented in P3StoreDist.";
   }
 
-  void PushPullDefault(int key, const NDArray &comm_buf, int priority) override {
+  void PushPullDefault(int key, const NDArray &comm_buf, int priority,
+                      int epoch, const NDArray &server_epochs, int rank=0) override {
     CHECK(gradient_compression_->get_type() == CompressionType::kNone)
              << "Compression not supported in P3StoreDist";
     auto pushpull = [this, key, comm_buf, priority](

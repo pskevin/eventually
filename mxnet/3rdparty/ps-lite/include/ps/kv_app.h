@@ -117,6 +117,7 @@ class KVWorker : public SimpleApp {
            int cmd = 0,
            const Callback& cb = nullptr,
            int priority = 0) {
+    // std::cout<<"We are doing what we didn't expect to do"<<std::endl;
     return ZPush(
         SArray<Key>(keys), SArray<Val>(vals), SArray<int>(lens), cmd, cb,
         priority);
@@ -198,6 +199,7 @@ class KVWorker : public SimpleApp {
                int cmd = 0,
                const Callback& cb = nullptr,
                int priority = 0) {
+    // std::cout<<"We are doing what we didn't expect to do (PushPull)"<<std::endl;
     CHECK_NOTNULL(outs);
     if (outs->empty())
       outs->resize(vals.size());
@@ -245,7 +247,9 @@ class KVWorker : public SimpleApp {
             const SArray<int>& lens = {},
             int cmd = 0,
             const Callback& cb = nullptr,
-            int priority = 0) {
+            int priority = 0,
+            const SArray<int>& server_epochs = {},
+            int epoch = 0, int rank = 0) {
     int ts = obj_->NewRequest(kServerGroup);
     AddCallback(ts, cb);
     KVPairs<Val> kvs;
@@ -253,7 +257,7 @@ class KVWorker : public SimpleApp {
     kvs.vals = vals;
     kvs.lens = lens;
     kvs.priority = priority;
-    Send(ts, true, false, cmd, kvs);
+    Send(ts, true, false, cmd, kvs, server_epochs, epoch, rank);
     return ts;
   }
 
@@ -270,12 +274,14 @@ class KVWorker : public SimpleApp {
             SArray<int>* lens = nullptr,
             int cmd = 0,
             const Callback& cb = nullptr,
-            int priority = 0) {
+            int priority = 0,
+            const SArray<int>& server_epochs = {},
+            int epoch = 0, int rank = 0) {
     int ts = AddPullCB(keys, vals, lens, cmd, cb);
     KVPairs<Val> kvs;
     kvs.keys = keys;
     kvs.priority = priority;
-    Send(ts, false, true, cmd, kvs);
+    Send(ts, false, true, cmd, kvs, server_epochs, epoch, rank);
     return ts;
   }
 
@@ -293,15 +299,18 @@ class KVWorker : public SimpleApp {
                 SArray<int>* lens = nullptr,
                 int cmd = 0,
                 const Callback& cb = nullptr,
-                int priority = 0) {
-    int ts = AddPullCB(keys, outs, lens, cmd, cb);
+                int priority = 0,
+                const SArray<int>& server_epochs = {},
+                SArray<int>* out_server_epochs = {},
+                int epoch = 0, int rank = 0) {
+    int ts = AddPullCB(keys, outs, lens, cmd, cb, out_server_epochs);
     KVPairs<Val> kvs;
     kvs.keys = keys;
     kvs.vals = vals;
     kvs.priority = priority;
     if (lens)
       kvs.lens = *lens;
-    Send(ts, true, true, cmd, kvs);
+    Send(ts, true, true, cmd, kvs, server_epochs, epoch, rank);
     return ts;
   }
   using SlicedKVs = std::vector<std::pair<bool, KVPairs<Val>>>;
@@ -329,7 +338,7 @@ class KVWorker : public SimpleApp {
    */
   template <typename C, typename D>
   int AddPullCB(const SArray<Key>& keys, C* vals, D* lens,
-            int cmd, const Callback& cb);
+            int cmd, const Callback& cb, SArray<int>* server_epochs = {});
   /**
    * \brief add a callback for a request. threadsafe.
    * @param cb callback
@@ -353,7 +362,7 @@ class KVWorker : public SimpleApp {
    * @param push whether or not it is a pull request
    * @param cmd command
    */
-  void Send(int timestamp, bool push, bool pull, int cmd, const KVPairs<Val>& kvs);
+  void Send(int timestamp, bool push, bool pull, int cmd, const KVPairs<Val>& kvs, const SArray<int>& server_epochs = {}, int epoch = 0, int rank = 0);
   /** \brief internal receive handle */
   void Process(const Message& msg);
   /** \brief default kv slicer */
@@ -363,6 +372,7 @@ class KVWorker : public SimpleApp {
 
   /** \brief data buffer for received kvs for each timestamp */
   std::unordered_map<int, std::vector<KVPairs<Val>>> recv_kvs_;
+  std::unordered_map<int, std::vector<SArray<int>>> recv_epochs_;
   /** \brief callbacks for each timestamp */
   std::unordered_map<int, Callback> callbacks_;
   /** \brief lock */
@@ -385,6 +395,11 @@ struct KVMeta {
   int timestamp;
   /** \brief the customer id of worker */
   int customer_id;
+  /** \brief the worker epoch */
+  int epoch;
+  /** \brief the server-side worker epochs at param pull of worker */
+  SArray<int> server_epochs;
+  int rank;
 };
 
 /**
@@ -470,6 +485,7 @@ void KVServer<Val>::Process(const Message& msg) {
   if (msg.meta.simple_app) {
     SimpleApp::Process(msg); return;
   }
+  // std::cout<<"Reached until Process of KVServer"<<std::endl;
   KVMeta meta;
   meta.cmd       = msg.meta.head;
   meta.push      = msg.meta.push;
@@ -477,6 +493,9 @@ void KVServer<Val>::Process(const Message& msg) {
   meta.sender    = msg.meta.sender;
   meta.timestamp = msg.meta.timestamp;
   meta.customer_id = msg.meta.customer_id;
+  meta.epoch      = msg.meta.epoch;
+  meta.rank       = msg.meta.rank;
+  meta.server_epochs = msg.meta.server_epochs;
   KVPairs<Val> data;
   int n = msg.data.size();
   if (n) {
@@ -496,6 +515,7 @@ void KVServer<Val>::Process(const Message& msg) {
 template <typename Val>
 void KVServer<Val>::Response(const KVMeta& req, const KVPairs<Val>& res) {
   Message msg;
+  // std::cout<<"S Response1"<<std::endl;
   msg.meta.app_id = obj_->app_id();
   msg.meta.customer_id = req.customer_id;
   msg.meta.request     = false;
@@ -504,6 +524,10 @@ void KVServer<Val>::Response(const KVMeta& req, const KVPairs<Val>& res) {
   msg.meta.head        = req.cmd;
   msg.meta.timestamp   = req.timestamp;
   msg.meta.recver      = req.sender;
+  msg.meta.epoch       = req.epoch;
+  msg.meta.rank        = req.rank;
+  msg.meta.server_epochs = req.server_epochs;
+  // std::cout<<"S Response2"<<std::endl;
   if (res.keys.size()) {
     msg.AddData(res.keys);
     msg.AddData(res.vals);
@@ -511,7 +535,9 @@ void KVServer<Val>::Response(const KVMeta& req, const KVPairs<Val>& res) {
       msg.AddData(res.lens);
     }
   }
+  // std::cout<<"S Response3"<<std::endl;
   Postoffice::Get()->van()->Send(msg);
+  // std::cout<<"S Response4"<<std::endl;
 }
 
 template <typename Val>
@@ -572,7 +598,8 @@ void KVWorker<Val>::DefaultSlicer(
 }
 
 template <typename Val>
-void KVWorker<Val>::Send(int timestamp, bool push, bool pull, int cmd, const KVPairs<Val>& kvs) {
+void KVWorker<Val>::Send(int timestamp, bool push, bool pull, int cmd, const KVPairs<Val>& kvs,
+                        const SArray<int>& server_epochs, int epoch, int rank) {
   // slice the message
   SlicedKVs sliced;
   slicer_(kvs, Postoffice::Get()->GetServerKeyRanges(), &sliced);
@@ -600,6 +627,9 @@ void KVWorker<Val>::Send(int timestamp, bool push, bool pull, int cmd, const KVP
     msg.meta.timestamp   = timestamp;
     msg.meta.recver      = Postoffice::Get()->ServerRankToID(i);
     msg.meta.priority    = kvs.priority;
+    msg.meta.server_epochs = server_epochs;
+    msg.meta.epoch        = epoch;
+    msg.meta.rank         = rank;
     const auto& kvs = s.second;
     if (kvs.keys.size()) {
       msg.AddData(kvs.keys);
@@ -608,6 +638,7 @@ void KVWorker<Val>::Send(int timestamp, bool push, bool pull, int cmd, const KVP
         msg.AddData(kvs.lens);
       }
     }
+    // std::cout<<"Reached until PO send for Push"<<std::endl;
     Postoffice::Get()->van()->Send(msg);
   }
 }
@@ -618,25 +649,38 @@ void KVWorker<Val>::Process(const Message& msg) {
   if (msg.meta.simple_app) {
     SimpleApp::Process(msg); return;
   }
+  // std::cout<<"W Process1"<<std::endl;
   // store the data for pulling
   int ts = msg.meta.timestamp;
   if (msg.meta.pull) {
+    // std::cout<<"W Process2 Pull"<<std::endl;
     CHECK_GE(msg.data.size(), (size_t)2);
     KVPairs<Val> kvs;
+    SArray<int> sepochs = msg.meta.server_epochs;
+    // std::cout<<"W Process 3"<<std::endl;
     kvs.keys = msg.data[0];
     kvs.vals = msg.data[1];
     if (msg.data.size() > (size_t)2) {
       kvs.lens = msg.data[2];
     }
+    // std::cout<<"W Process 4"<<std::endl;
     mu_.lock();
     recv_kvs_[ts].push_back(kvs);
+    if(sepochs.size()) {
+      recv_epochs_[ts].push_back(sepochs);
+    }
     mu_.unlock();
+    // std::cout<<"W Process 5"<<std::endl;
+
   }
 
   // finished, run callbacks
   if (obj_->NumResponse(ts) == Postoffice::Get()->num_servers() - 1)  {
+    // std::cout<<"W Process 6 CB"<<std::endl;
     RunCallback(ts);
   }
+    // std::cout<<"W Process 7 CB Done"<<std::endl;
+
 }
 template <typename Val>
 void KVWorker<Val>::RunCallback(int timestamp) {
@@ -658,12 +702,17 @@ template <typename Val>
 template <typename C, typename D>
 int KVWorker<Val>::AddPullCB(
     const SArray<Key>& keys, C* vals, D* lens, int cmd,
-    const Callback& cb) {
+    const Callback& cb, SArray<int>* server_epochs) {
   int ts = obj_->NewRequest(kServerGroup);
-  AddCallback(ts, [this, ts, keys, vals, lens, cb]() mutable {
+  AddCallback(ts, [this, ts, keys, vals, lens, cb, server_epochs]() mutable {
+      // std::cout<<"AddPullCB exec1"<<std::endl;
       mu_.lock();
       auto& kvs = recv_kvs_[ts];
+      // std::cout<<"AddPullCB exec2"<<std::endl;
+      auto& sepochs = recv_epochs_[ts];
+      // std::cout<<"AddPullCB exec3"<<std::endl;
       mu_.unlock();
+
 
       // do check
       size_t total_key = 0, total_val = 0;
@@ -676,6 +725,7 @@ int KVWorker<Val>::AddPullCB(
         total_val += s.vals.size();
       }
       CHECK_EQ(total_key, keys.size()) << "lost some servers?";
+      // std::cout<<"AddPullCB exec4"<<std::endl;
 
       // fill vals and lens
       std::sort(kvs.begin(), kvs.end(), [](
@@ -705,12 +755,31 @@ int KVWorker<Val>::AddPullCB(
           memcpy(p_lens, s.lens.data(), s.lens.size() * sizeof(int));
           p_lens += s.lens.size();
         }
+      };
+      int* se_vals = server_epochs->data();
+      if (sepochs.size() != 0) {
+        // std::cout<<"size="<<sepochs.size()<<std::endl;
+        for (const auto& s : sepochs) {
+          // std::cout<<"length of s: "<<s.size()<<std::endl;
+          memcpy(se_vals, s.data(), s.size() * sizeof(Val));
+          // std::cout<<"Done memcpy"<<std::endl;
+          if(s.size()!=0) {
+            for (int j=0; j<s.size(); j++){
+              // std::cout<<"s["<<j<<"]="<<s[j]<<std::endl;
+              (*server_epochs)[j] = s[j];
+            }
+            break;
+          }
+        }
       }
+      // std::cout<<"AddPullCB exec6"<<std::endl;
 
       mu_.lock();
       recv_kvs_.erase(ts);
+      recv_epochs_.erase(ts);
       mu_.unlock();
       if (cb) cb();
+      // std::cout<<"AddPullCB execN"<<std::endl;
     });
 
   return ts;
