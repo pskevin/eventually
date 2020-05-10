@@ -487,7 +487,10 @@ void Van::PackMeta(const Meta& meta, char** meta_buf, int* buf_size) {
   pb.set_simple_app(meta.simple_app);
   pb.set_priority(meta.priority);
   pb.set_customer_id(meta.customer_id);
+  pb.set_epoch(meta.epoch);
+  pb.set_rank(meta.rank);
   for (auto d : meta.data_type) pb.add_data_type(d);
+  for (auto se : meta.server_epochs) pb.add_server_epochs(se);
   if (!meta.control.empty()) {
     auto ctrl = pb.mutable_control();
     ctrl->set_cmd(meta.control.cmd);
@@ -531,9 +534,15 @@ void Van::UnpackMeta(const char* meta_buf, int buf_size, Meta* meta) {
   meta->priority = pb.priority();
   meta->body = pb.body();
   meta->customer_id = pb.customer_id();
+  meta->epoch = pb.epoch();
+  meta->rank = pb.rank();
   meta->data_type.resize(pb.data_type_size());
   for (int i = 0; i < pb.data_type_size(); ++i) {
     meta->data_type[i] = static_cast<DataType>(pb.data_type(i));
+  }
+  meta->server_epochs.resize(pb.server_epochs_size());
+  for (int i = 0; i < pb.server_epochs_size(); ++i) {
+    meta->server_epochs[i] = static_cast<int>(pb.server_epochs(i));
   }
   if (pb.has_control()) {
     const auto& ctrl = pb.control();

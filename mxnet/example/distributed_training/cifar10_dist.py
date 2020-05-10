@@ -27,10 +27,12 @@ import numpy as np
 import mxnet as mx
 from mxnet import autograd, gluon, kv, nd
 from mxnet.gluon.model_zoo import vision
+import time
 
+print("creating--------")
 # Create a distributed key-value store
-store = kv.create('dist')
-
+store = kv.create('dist_async')
+print("epoch---------------")
 # Clasify the images into one of the 10 digits
 num_outputs = 10
 
@@ -40,13 +42,14 @@ batch_size_per_gpu = 64
 epochs = 5
 
 # How many GPUs per machine
-gpus_per_machine = 4
+cpus_per_machine = 8
 # Effective batch size across all GPUs
-batch_size = batch_size_per_gpu * gpus_per_machine
+batch_size = batch_size_per_gpu * cpus_per_machine
 
 # Create the context (a list of all GPUs to be used for training)
-ctx = [mx.gpu(i) for i in range(gpus_per_machine)]
+ctx = [mx.cpu(i) for i in range(cpus_per_machine)]
 
+print("checkpnt--------")
 
 # Convert to float 32
 # Having channel as the first dimension makes computation more efficient. Hence the (2,0,1) transpose.
@@ -87,7 +90,7 @@ class SplitSampler(gluon.data.sampler.Sampler):
 
 # Load the training data
 train_data = gluon.data.DataLoader(gluon.data.vision.CIFAR10(train=True, transform=transform), batch_size,
-                                   sampler=SplitSampler(50000, store.num_workers, store.rank))
+                                   sampler=SplitSampler(49152, store.num_workers, store.rank))
 
 # Load the test data
 test_data = gluon.data.DataLoader(gluon.data.vision.CIFAR10(train=False, transform=transform),
@@ -101,6 +104,7 @@ net.collect_params().initialize(mx.init.Xavier(), ctx=ctx)
 
 # SoftmaxCrossEntropy is the most common choice of loss function for multiclass classification
 softmax_cross_entropy = gluon.loss.SoftmaxCrossEntropyLoss()
+print("Epoch")
 
 # Use Adam optimizer. Ask trainer to use the distributor kv store.
 trainer = gluon.Trainer(net.collect_params(), 'adam', {'learning_rate': .001}, kvstore=store)
@@ -160,7 +164,7 @@ def forward_backward(network, data, label):
 
 
 # Train a batch using multiple GPUs
-def train_batch(batch_list, context, network, gluon_trainer):
+def train_batch(batch_list, context, network, gluon_trainer, epoch=0):
     """ Training with multiple GPUs
 
     Parameters
@@ -187,7 +191,9 @@ def train_batch(batch_list, context, network, gluon_trainer):
 
     # Update the parameters
     this_batch_size = batch_list[0].shape[0]
-    gluon_trainer.step(this_batch_size)
+    if (store.rank == 1):
+        time.sleep(10)
+    gluon_trainer.step(this_batch_size, epoch=epoch)
 
 
 # Run as many epochs as required
@@ -196,10 +202,9 @@ for epoch in range(epochs):
     # Iterate through batches and run training using multiple GPUs
     batch_num = 1
     for batch in train_data:
-
         # Train the batch using multiple GPUs
-        train_batch(batch, ctx, net, trainer)
-
+        train_batch(batch, ctx, net, trainer, epoch=epoch*batch[0].shape[0] + batch_num-1)
+        print("trained batch %d", batch_num)
         batch_num += 1
 
     # Print test accuracy after every epoch

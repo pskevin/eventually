@@ -57,4 +57,10 @@ message PBMeta {
   optional int32 data_size = 11;
   // priority
   optional int32 priority = 13 [default = 0];
+  // worker epoch
+  optional int32 epoch = 14 [default = 0];
+  // server epochs
+  repeated int32 server_epochs = 15 [packed=true];
+  // worker rank
+  optional int32 rank = 16;
 }

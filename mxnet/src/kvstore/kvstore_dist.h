@@ -47,6 +47,7 @@ class KVStoreDist : public KVStoreLocal {
       : KVStoreLocal(use_device_comm), ps_worker_(nullptr), server_(nullptr) {
     if (IsWorkerNode()) {
       int new_customer_id = GetNewCustomerId();
+      // LOG(INFO) << "Customer id is " << new_customer_id <<std::endl;
       ps_worker_ = new ps::KVWorker<char>(0, new_customer_id);
       ps::StartAsync(new_customer_id, "mxnet\0");
       if (!ps::Postoffice::Get()->is_recovery()) {
@@ -192,12 +193,15 @@ class KVStoreDist : public KVStoreLocal {
 
   void InitImpl(const std::vector<int>& keys,
                 const std::vector<NDArray>& values) override {
+                // int epoch=0,
+                // const std::vector<int>& server_epochs = std::vector<int>(),
+                // int rank=0) override {
     CheckUnique(keys);
     for (size_t i = 0; i < keys.size(); ++i) {
       InitKV(keys[i], values[i]);
     }
     if (get_rank() == 0 && this->ps_worker_->get_customer()->customer_id() == 0) {
-      Push_(keys, values, 0, false);
+      Push_(keys, values, 0, false);//, epoch, server_epochs, rank);
       // wait until the push is finished
       for (const int key : keys) {
         comm_buf_[key].WaitToWrite();
@@ -219,7 +223,10 @@ class KVStoreDist : public KVStoreLocal {
                     const std::vector<int>& okeys,
                     const std::vector<NDArray>& values,
                     const std::vector<NDArray*>& outputs,
-                    int priority) override {
+                    int priority, int epoch=0,
+                const std::vector<NDArray>& server_epochs = std::vector<NDArray>(),
+                const std::vector<NDArray*>& out_server_epochs = std::vector<NDArray*>(),
+                    int rank=0) override {
     std::vector<int> uniq_vkeys;
     std::vector<int> uniq_okeys;
     std::vector<std::vector<NDArray>> grouped_vals;
@@ -227,6 +234,7 @@ class KVStoreDist : public KVStoreLocal {
 
     GroupKVPairsPush(vkeys, values, &uniq_vkeys, &grouped_vals, false);
     GroupKVPairsPull(okeys, outputs, &uniq_okeys, &grouped_outs, true);
+    // std::cout<<"No. of keys: "<<uniq_vkeys.size()<<std::endl;
     CHECK_EQ(uniq_vkeys.size(), uniq_okeys.size())
              << "List of push and pull keys are different";
 
@@ -236,6 +244,8 @@ class KVStoreDist : public KVStoreLocal {
       int key = uniq_vkeys[i];
       const auto& vals = grouped_vals[i];
       const auto& outs = grouped_outs[i];
+      const auto& sepoch = server_epochs[0];
+      const auto& sepochout = out_server_epochs[0];
 
       NDArray merged = comm_->Reduce(key, vals, priority);
 
@@ -251,6 +261,14 @@ class KVStoreDist : public KVStoreLocal {
       CHECK_EQ(push_dtype, pull_dtype) << "Output buffer dtype is different";
 
       auto &comm_buf = comm_buf_[key];
+      auto &epoch_store = server_epochs_buf_;
+      // std::cout<<"NUM WORKERS "<<ps::Postoffice::Get()->num_workers()<<std::endl;
+      if (epoch_store.is_none()) {
+        // std::cout<<"Epoch_buf is empty once"<<std::endl;
+        TShape tshape = TShape(1,ps::Postoffice::Get()->num_workers());
+        epoch_store = NDArray(tshape, pinned_ctx_, false, mshadow::kInt32);
+        epoch_store = 0;
+      }
       if (merged.ctx().dev_mask() == cpu::kDevMask) {
         comm_buf = merged;  // avoid memory copy
       } else {
@@ -262,8 +280,17 @@ class KVStoreDist : public KVStoreLocal {
 
       CHECK(gradient_compression_->get_type() == CompressionType::kNone)
                << "Compression not supported with PushPull";
-      PushPullDefault(key, comm_buf, priority);
+      // ps::SArray<int> ps_server_epochs(server_epochs); 
+      PushPullDefault(key, comm_buf, priority, epoch, sepoch, rank);
       comm_->Broadcast(key, comm_buf, outs, priority);
+      CopyFromTo(sepoch, sepochout);
+      CopyFromTo(sepoch, epoch_store);
+      // CopyFromTo(sepoch, epoch_store);
+      // std::cout<<"Done copying"<<std::endl;
+      // for (int j=0; j<ps_server_epochs.size(); j++) {
+      //   std::cout<<"Updating? "<<ps_server_epochs[j]<<std::endl;
+      //   *(out_server_epochs[j]) = ps_server_epochs[j];
+      // }
     }
   }
 
@@ -295,7 +322,7 @@ class KVStoreDist : public KVStoreLocal {
                            true, grouped_vals[i][0]->dtype());
       }
       PullDefault(key, recv_buf, priority);
-
+      // std::cout<<"Done Pull"<<std::endl;
       comm_->Broadcast(key, recv_buf, grouped_vals[i], priority);
     }
   }
@@ -343,11 +370,15 @@ class KVStoreDist : public KVStoreLocal {
   void Push_(const std::vector<int>& keys,
              const std::vector<NDArray>& values,
              int priority,
-             bool do_merge) {
+             bool do_merge,
+             int epoch=0,
+             const std::vector<int>& server_epochs = std::vector<int>(),
+             int rank = 0) {
     // first aggregate the values over keys
     std::vector<int> uniq_keys;
     std::vector<std::vector<NDArray> > grouped_vals;
     GroupKVPairsPush(keys, values, &uniq_keys, &grouped_vals, false);
+    // std::cout<<"In Push_"<<std::endl;
 
     for (size_t i = 0; i < uniq_keys.size(); ++i) {
       // merge over devices
@@ -378,8 +409,9 @@ class KVStoreDist : public KVStoreLocal {
       // push to servers
       if (storage_type == kDefaultStorage) {
         if (gradient_compression_->get_type() == CompressionType::kNone) {
+          // std::cout<<"In Push_ with no grad compression, about to pushdefault"<<std::endl;
           PSKV& pskv = EncodeDefaultKey(key, comm_buf.shape().Size(), num_bytes);
-          PushDefault(key, comm_buf, pskv, priority);
+          PushDefault(key, comm_buf, pskv, priority, epoch, server_epochs, rank);
         } else {
           CHECK_EQ(dtype, mshadow::kFloat32) << "Gradient compression is only supported for "
                                              << "float32 type of parameters";
@@ -398,6 +430,7 @@ class KVStoreDist : public KVStoreLocal {
           }
         }
       } else if (storage_type == kRowSparseStorage) {
+        // std::cout<<"Row sparse storage in Push_"<<std::endl;
         CHECK(gradient_compression_->get_type() == CompressionType::kNone)
           << "Gradient compression for row sparse storage type is not supported";
         PushRowSparse(key, comm_buf, priority);
@@ -442,19 +475,23 @@ class KVStoreDist : public KVStoreLocal {
       "KVStoreDistCompressedPush");
   }
 
-  virtual void PushDefault(int key, const NDArray &send_buf, const PSKV& pskv, int priority) {
+  virtual void PushDefault(int key, const NDArray &send_buf, const PSKV& pskv, int priority,
+                        int epoch=0, const std::vector<int>& server_epochs = std::vector<int>(), int rank=0) {
+    // std::cout<<"Doing default Push"<<std::endl;
     auto push_to_servers =
-        [this, key, pskv, send_buf](RunContext rctx, Engine::CallbackOnComplete cb) {
+        [this, key, pskv, send_buf, epoch, server_epochs, rank](RunContext rctx, Engine::CallbackOnComplete cb) {
           const int dtype = send_buf.dtype();
           // convert to ps keys
           const size_t size = send_buf.shape().Size() * mshadow::mshadow_sizeof(dtype);
           char* data = static_cast<char *>(send_buf.data().dptr_);
           // do push. false means no delete
           ps::SArray<char> vals(data, size, false);
+          ps::SArray<int> ps_server_epochs(server_epochs);
           int cmd = GetCommandType(RequestType::kDefaultPushPull, dtype);
           CHECK_NOTNULL(ps_worker_)->ZPush(
               pskv.keys, vals, pskv.lens,
-              cmd, [cb]() { cb(); });
+              cmd, [cb]() { cb(); }, 0,
+              ps_server_epochs, epoch, rank);
         };
     Engine::Get()->PushAsync(
         push_to_servers,
@@ -498,8 +535,10 @@ class KVStoreDist : public KVStoreLocal {
         "KVStoreDistRowSparsePush");
   }
 
-  virtual void PullDefault(int key, const NDArray &recv_buf, int priority) {
-    auto pull_from_servers = [this, key, recv_buf](
+  virtual void PullDefault(int key, const NDArray &recv_buf, int priority,
+                          int epoch=0, const std::vector<int>& server_epochs = std::vector<int>(), int rank=0) {
+    // std::cout<<"Doing default Pull"<<std::endl;
+    auto pull_from_servers = [this, key, recv_buf, epoch, server_epochs, rank](
         RunContext rctx, Engine::CallbackOnComplete cb) {
       // convert to ps keys
       size_t size = recv_buf.shape().Size();
@@ -511,12 +550,13 @@ class KVStoreDist : public KVStoreLocal {
       char* data = static_cast<char*> (recv_buf.data().dptr_);
       // false means not to delete data when SArray is deleted
       auto vals = new ps::SArray<char>(data, size * num_bytes, false);
+      ps::SArray<int> ps_server_epochs(server_epochs);
       // issue pull
       RequestType mode = (gradient_compression_->get_type() != CompressionType::kNone) ?
                 RequestType::kCompressedPushPull : RequestType::kDefaultPushPull;
       const int cmd = GetCommandType(mode, dtype);
       CHECK_NOTNULL(ps_worker_)->ZPull(
-        pskv.keys, vals, &pskv.lens, cmd, [vals, cb](){ delete vals; cb(); });
+        pskv.keys, vals, &pskv.lens, cmd, [vals, cb](){ delete vals; cb(); }, 0, ps_server_epochs, epoch, rank);
     };
 
     CHECK_NOTNULL(Engine::Get())->PushAsync(
@@ -575,8 +615,9 @@ class KVStoreDist : public KVStoreLocal {
       "KVStoreDistRowSparsePull");
   }
 
-  virtual void PushPullDefault(int key, const NDArray &comm_buf, int priority) {
-    auto pushpull = [this, key, comm_buf](
+  virtual void PushPullDefault(int key, const NDArray &comm_buf, int priority, int epoch,
+                    const NDArray &ps_server_epochs, int rank=0) {
+    auto pushpull = [this, key, comm_buf, epoch, ps_server_epochs, rank](
         RunContext rctx, Engine::CallbackOnComplete cb) {
       size_t size = comm_buf.shape().Size();
       const int dtype = comm_buf.dtype();
@@ -587,15 +628,28 @@ class KVStoreDist : public KVStoreLocal {
       char* data = static_cast<char*>(comm_buf.data().dptr_);
       auto vals = new ps::SArray<char>(data, size * num_bytes, false);
 
+      size_t sesize = ps_server_epochs.shape().Size();
+      const int sedtype = ps_server_epochs.dtype();
+      const int senum_bytes = mshadow::mshadow_sizeof(sedtype);
+      int* sedata = static_cast<int*>(ps_server_epochs.data().dptr_);
+      auto server_epoch_vals = new ps::SArray<int>(sedata, sesize, false);
+      // std::cout<<"About to do ZPushPull. sesize: "<<sesize<<" "<<server_epoch_vals->size()<<std::endl;
+      // if (sesize != 0) {
+      //   // (*server_epoch_vals)[0] = 10;
+      //   std::cout<<"size non zero: "<<std::endl;
+      // } else {
+      //   std::cout<<"size zero"<<std::endl;
+      // }
+
       CHECK_NOTNULL(ps_worker_)->ZPushPull(
-        pskv.keys, *vals, vals, &pskv.lens, cmd, [vals, cb](){ delete vals; cb(); });
+        pskv.keys, *vals, vals, &pskv.lens, cmd, [vals,server_epoch_vals, cb](){ delete vals;  delete server_epoch_vals; cb(); }, 0, *server_epoch_vals, server_epoch_vals, epoch, rank);
     };
 
     CHECK_NOTNULL(Engine::Get())->PushAsync(
         pushpull,
         pinned_ctx_,
         {},
-        {comm_buf.var()},
+        {comm_buf.var(), ps_server_epochs.var()},
         FnProperty::kNormal,
         priority,
         "KVStoreDistDefaultStoragePushPull");
@@ -836,6 +890,7 @@ class KVStoreDist : public KVStoreLocal {
    * for the data in pull and for original data in push
    */
   std::unordered_map<int, NDArray> comm_buf_;
+  NDArray server_epochs_buf_;
   /**
    * \brief buffer for compressed data
    * Used when gradient compression is active and action

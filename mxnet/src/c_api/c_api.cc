@@ -2404,10 +2404,17 @@ int MXKVStorePushPull(KVStoreHandle handle,
                       const int* okeys,
                       NDArrayHandle* vals,
                       NDArrayHandle* outs,
-                      int priority) {
+                      int priority,
+                      int epoch,
+                      NDArrayHandle* server_epochs,
+                      NDArrayHandle* out_server_epochs,
+                      mx_uint snum,
+                      int rank) {
   API_BEGIN();
   std::vector<int> v_vkeys(vnum);
   std::vector<int> v_okeys(onum);
+  std::vector<NDArray> v_server_epochs(snum);
+  std::vector<NDArray*> v_out_server_epochs(snum);
   std::vector<NDArray> v_vals(vnum);
   std::vector<NDArray*> v_outs(onum);
   for (mx_uint i = 0; i < vnum; ++i) {
@@ -2418,8 +2425,12 @@ int MXKVStorePushPull(KVStoreHandle handle,
     v_okeys[i] = okeys[i];
     v_outs[i] = static_cast<NDArray*>(outs[i]);
   }
+  // for (mx_uint i = 0; i < snum; ++i) {
+  v_server_epochs[0] = *static_cast<NDArray*>(server_epochs[0]);
+  v_out_server_epochs[0] = static_cast<NDArray*>(out_server_epochs[0]);
+  // }
   static_cast<KVStore*>(handle)->PushPull(v_vkeys, v_okeys, v_vals, v_outs,
-    priority);
+    priority, epoch, v_server_epochs, v_out_server_epochs, rank);
   API_END();
 }
 

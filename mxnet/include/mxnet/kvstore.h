@@ -238,7 +238,11 @@ class KVStore {
                         const std::vector<int>& okeys,
                         const std::vector<NDArray>& values,
                         const std::vector<NDArray*>& outs,
-                        int priority = 0) = 0;
+                        int priority = 0,
+                        int epoch = 0,
+                        const std::vector<NDArray>& server_epochs = std::vector<NDArray>(),
+                        const std::vector<NDArray*>& out_server_epochs = std::vector<NDArray*>(),
+                        int rank = 0) = 0;
 
   /*!
    * \brief push and pull a list of key-value pairs from the store

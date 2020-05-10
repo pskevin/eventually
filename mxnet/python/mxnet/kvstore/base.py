@@ -71,10 +71,13 @@ def _ctype_dict(param_dict):
     c_vals = c_array(ctypes.c_char_p, [c_str(str(v)) for v in param_dict.values()])
     return (c_keys, c_vals)
 
+def _ctype_ndarr(param_list):
+    return c_handle_array([param_list])
+
 class KVStoreBase(object):
     """An abstract key-value store interface for data parallel training."""
 
-    def broadcast(self, key, value, out, priority=0):
+    def broadcast(self, key, value, out, priority=0, epoch=0, server_epochs=[]):
         """ Broadcast the `value` NDArray at rank 0 to all ranks,
         and store the result in `out`
 
@@ -95,7 +98,7 @@ class KVStoreBase(object):
         """
         raise NotImplementedError()
 
-    def pushpull(self, key, value, out=None, priority=0):
+    def pushpull(self, key, value, out=None, priority=0, epoch=0, server_epochs=[]):
         """ Performs push and pull a single value or a sequence of values from the store.
 
         This function is coalesced form of push and pull operations.
@@ -246,7 +249,7 @@ class KVStoreBase(object):
 class TestStore(KVStoreBase):
     """A key-value store for testing."""
 
-    def broadcast(self, key, value, out, priority=0):
+    def broadcast(self, key, value, out, priority=0, epoch=0, server_epochs=[]):
         """ Broadcast the `value` NDArray at rank 0 to all ranks,
         and store the result in `out`
 
@@ -269,7 +272,7 @@ class TestStore(KVStoreBase):
         for o in out:
             o[:] = value
 
-    def pushpull(self, key, value, out=None, priority=0):
+    def pushpull(self, key, value, out=None, priority=0, epoch=0, server_epochs=[]):
         """ Performs push and pull a single value or a sequence of values from the store.
 
         This function is coalesced form of push and pull operations.
