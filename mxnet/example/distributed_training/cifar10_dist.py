@@ -191,8 +191,6 @@ def train_batch(batch_list, context, network, gluon_trainer, epoch=0):
 
     # Update the parameters
     this_batch_size = batch_list[0].shape[0]
-    if (store.rank == 1):
-        time.sleep(10)
     gluon_trainer.step(this_batch_size, epoch=epoch)
 
 

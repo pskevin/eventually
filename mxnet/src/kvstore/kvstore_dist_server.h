@@ -352,9 +352,10 @@ class KVStoreDistServer {
       // let the main thread to execute updater_, which is necessary for python
       auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
       auto& update =  sync_mode_ ? update_buf->merged : update_buf->temp_array;
+      auto& clocked = clock_[key];
       auto& requests = update_buf->request;
-      size_t csize = clock_.shape().Size();
-      int* cdata = static_cast<int*>(clock_.data().dptr_);
+      size_t csize = clocked.shape().Size();
+      int* cdata = static_cast<int*>(clocked.data().dptr_);
       auto clock_vals = new ps::SArray<int>(cdata, csize, false);
       int num_workers = ps::Postoffice::Get()->num_workers();
       auto local_clock = new std::vector<int>(num_workers);
@@ -743,13 +744,8 @@ class KVStoreDistServer {
     }
     int key = DecodeKey(req_data.keys[0]);
     auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
-    int worker = req_meta.rank;
-    int worker_epoch = req_meta.epoch;
-    ps::SArray<int> worker_clock = req_meta.server_epochs;
-    // std::cout<<"worker_clock length is "<<worker_clock.size()<<" for worker "<<worker<<std::endl;
-    // for (int i=0; i<worker_clock.size(); i++) {
-    //   std::cout<<"val "<<i<<" = "<<worker_clock[i]<<std::endl;
-    // }
+    auto& clocked = clock_[key];
+
     // there used several WaitToRead, this is because \a recved's memory
     // could be deallocated when this function returns. so we need to make sure
     // the operators with \a NDArray are actually finished
@@ -770,8 +766,8 @@ class KVStoreDistServer {
                          has_multi_precision_copy(type) ? mshadow::kFloat32 : type.dtype);
         CopyFromTo(recved, &stored, 0);
         TShape tshape = TShape(1,ps::Postoffice::Get()->num_workers());
-        clock_ = NDArray(tshape, Context(), false, mshadow::kInt32);
-        clock_ = 0;
+        clocked = NDArray(tshape, Context(), false, mshadow::kInt32);
+        clocked = 0;
         server->Response(req_meta);
         if (has_multi_precision_copy(type)) {
           auto& stored_dtype = store_[key];
@@ -841,7 +837,7 @@ class KVStoreDistServer {
   /**
    * \brief clock_ contains the value of last serviced worker iteration
    */
-  NDArray clock_;
+  std::unordered_map<int, NDArray> clock_;
   // ps::SArray<int> clock_;
 
   /**
