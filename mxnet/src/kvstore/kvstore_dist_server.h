@@ -347,7 +347,7 @@ class KVStoreDistServer {
   inline void ApplyUpdates(const DataHandleType type, const int key,
                            const ps::KVPairs<char>& req_data, UpdateBuf *update_buf,
                            ps::KVServer<char>* server) {
-    std::cout<<"Sync mode: "<<sync_mode_<<std::endl;
+    // std::cout<<"Sync mode: "<<sync_mode_<<std::endl;
     if (!sync_mode_ || update_buf->request.size() == (size_t) ps::NumWorkers()) {
       // let the main thread to execute updater_, which is necessary for python
       auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
@@ -365,12 +365,12 @@ class KVStoreDistServer {
           int staleness = 0;
           for (const auto& req : requests) {
             int worker = req.rank;
-            std::cout<<"For worker "<<worker<<std::endl;
+            // std::cout<<"For worker "<<worker<<std::endl;
             for (int i=0; i<num_workers; i++) {
-              std::cout<<"server, worker clock: "<< (*clock_vals)[i] << ", " << req.server_epochs[i]<<std::endl;
+              // std::cout<<"server, worker clock: "<< (*clock_vals)[i] << ", " << req.server_epochs[i]<<std::endl;
               staleness += (*clock_vals)[i] - req.server_epochs[i];
             }
-            std::cout<<"Cumulative staleness for worker "<<worker<<": "<<staleness<<std::endl;
+            // std::cout<<"Cumulative staleness for worker "<<worker<<": "<<staleness<<std::endl;
           }
           for (const auto& req : requests) {
             int worker = req.rank;
@@ -405,11 +405,11 @@ class KVStoreDistServer {
         // if there is a pull request, perform WaitToRead() once before DefaultStorageResponse
         if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
         stored.WaitToRead();
-        std::cout<<"New vector clock [";
+        // std::cout<<"New vector clock [";
         for (int i=0; i<num_workers; i++) {
-          std::cout<<(*local_clock)[i]<<" ";
+          // std::cout<<(*local_clock)[i]<<" ";
         }
-        std::cout<<"]"<<std::endl;
+        // std::cout<<"]"<<std::endl;
         for (const auto& req : update_buf->request) {
           if (req.pull) {
             auto getNewMeta = [this, req, num_workers, local_clock]() {
@@ -420,7 +420,7 @@ class KVStoreDistServer {
               return new_req;
             };
             const ps::KVMeta new_req = getNewMeta();
-            std::cout<<"Sending updated value of clock"<<std::endl;
+            // std::cout<<"Sending updated value of clock"<<std::endl;
             DefaultStorageResponse(type, key, new_req, req_data, server);
           }
         }
@@ -810,7 +810,7 @@ class KVStoreDistServer {
         ApplyUpdates(type, key, req_data, &updates, server);
       }
     } else {
-      std::cout<<"Server pull, calling defstorageresp 1"<<std::endl;
+      // std::cout<<"Server pull, calling defstorageresp 1"<<std::endl;
       DefaultStorageResponse(type, key, req_meta, req_data, server);
     }
   }
