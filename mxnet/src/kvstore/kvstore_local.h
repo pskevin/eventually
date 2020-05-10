@@ -357,12 +357,7 @@ class KVStoreLocal : public KVStore {
                              const std::vector<NDArray>& values,
                              const std::vector<NDArray*>& outs,
                              int priority) {
-                            //  , int epoch=0,
-                            //  const std::vector<int>& server_epochs = std::vector<int>(),
-                            //  const std::vector<int*>& out_server_epochs = std::vector<int*>(),
-                            //  int rank = 0) {
-    std::cout<<"Inside bcast of local"<<std::endl;
-    InitImpl(vkeys, values);//, epoch, server_epochs, rank);
+    InitImpl(vkeys, values);
     PullImpl(okeys, outs, priority, true);
   }
 

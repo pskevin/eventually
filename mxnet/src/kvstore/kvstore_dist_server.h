@@ -347,14 +347,15 @@ class KVStoreDistServer {
   inline void ApplyUpdates(const DataHandleType type, const int key,
                            const ps::KVPairs<char>& req_data, UpdateBuf *update_buf,
                            ps::KVServer<char>* server) {
-    std::cout<<"Sync mode: "<<sync_mode_<<std::endl;
+    // std::cout<<"Sync mode: "<<sync_mode_<<std::endl;
     if (!sync_mode_ || update_buf->request.size() == (size_t) ps::NumWorkers()) {
       // let the main thread to execute updater_, which is necessary for python
       auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
       auto& update =  sync_mode_ ? update_buf->merged : update_buf->temp_array;
+      auto& clocked = clock_[key];
       auto& requests = update_buf->request;
-      size_t csize = clock_.shape().Size();
-      int* cdata = static_cast<int*>(clock_.data().dptr_);
+      size_t csize = clocked.shape().Size();
+      int* cdata = static_cast<int*>(clocked.data().dptr_);
       auto clock_vals = new ps::SArray<int>(cdata, csize, false);
       int num_workers = ps::Postoffice::Get()->num_workers();
       auto local_clock = new std::vector<int>(num_workers);
@@ -364,12 +365,12 @@ class KVStoreDistServer {
           int staleness = 0;
           for (const auto& req : requests) {
             int worker = req.rank;
-            std::cout<<"For worker "<<worker<<std::endl;
+            // std::cout<<"For worker "<<worker<<std::endl;
             for (int i=0; i<num_workers; i++) {
-              std::cout<<"server, worker clock: "<< (*clock_vals)[i] << ", " << req.server_epochs[i]<<std::endl;
+              // std::cout<<"server, worker clock: "<< (*clock_vals)[i] << ", " << req.server_epochs[i]<<std::endl;
               staleness += (*clock_vals)[i] - req.server_epochs[i];
             }
-            std::cout<<"Cumulative staleness for worker "<<worker<<": "<<staleness<<std::endl;
+            // std::cout<<"Cumulative staleness for worker "<<worker<<": "<<staleness<<std::endl;
           }
           for (const auto& req : requests) {
             int worker = req.rank;
@@ -404,11 +405,11 @@ class KVStoreDistServer {
         // if there is a pull request, perform WaitToRead() once before DefaultStorageResponse
         if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
         stored.WaitToRead();
-        std::cout<<"New vector clock [";
+        // std::cout<<"New vector clock [";
         for (int i=0; i<num_workers; i++) {
-          std::cout<<(*local_clock)[i]<<" ";
+          // std::cout<<(*local_clock)[i]<<" ";
         }
-        std::cout<<"]"<<std::endl;
+        // std::cout<<"]"<<std::endl;
         for (const auto& req : update_buf->request) {
           if (req.pull) {
             auto getNewMeta = [this, req, num_workers, local_clock]() {
@@ -419,7 +420,7 @@ class KVStoreDistServer {
               return new_req;
             };
             const ps::KVMeta new_req = getNewMeta();
-            std::cout<<"Sending updated value of clock"<<std::endl;
+            // std::cout<<"Sending updated value of clock"<<std::endl;
             DefaultStorageResponse(type, key, new_req, req_data, server);
           }
         }
@@ -743,13 +744,8 @@ class KVStoreDistServer {
     }
     int key = DecodeKey(req_data.keys[0]);
     auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
-    int worker = req_meta.rank;
-    int worker_epoch = req_meta.epoch;
-    ps::SArray<int> worker_clock = req_meta.server_epochs;
-    // std::cout<<"worker_clock length is "<<worker_clock.size()<<" for worker "<<worker<<std::endl;
-    // for (int i=0; i<worker_clock.size(); i++) {
-    //   std::cout<<"val "<<i<<" = "<<worker_clock[i]<<std::endl;
-    // }
+    auto& clocked = clock_[key];
+
     // there used several WaitToRead, this is because \a recved's memory
     // could be deallocated when this function returns. so we need to make sure
     // the operators with \a NDArray are actually finished
@@ -770,8 +766,8 @@ class KVStoreDistServer {
                          has_multi_precision_copy(type) ? mshadow::kFloat32 : type.dtype);
         CopyFromTo(recved, &stored, 0);
         TShape tshape = TShape(1,ps::Postoffice::Get()->num_workers());
-        clock_ = NDArray(tshape, Context(), false, mshadow::kInt32);
-        clock_ = 0;
+        clocked = NDArray(tshape, Context(), false, mshadow::kInt32);
+        clocked = 0;
         server->Response(req_meta);
         if (has_multi_precision_copy(type)) {
           auto& stored_dtype = store_[key];
@@ -814,7 +810,7 @@ class KVStoreDistServer {
         ApplyUpdates(type, key, req_data, &updates, server);
       }
     } else {
-      std::cout<<"Server pull, calling defstorageresp 1"<<std::endl;
+      // std::cout<<"Server pull, calling defstorageresp 1"<<std::endl;
       DefaultStorageResponse(type, key, req_meta, req_data, server);
     }
   }
@@ -841,7 +837,7 @@ class KVStoreDistServer {
   /**
    * \brief clock_ contains the value of last serviced worker iteration
    */
-  NDArray clock_;
+  std::unordered_map<int, NDArray> clock_;
   // ps::SArray<int> clock_;
 
   /**
