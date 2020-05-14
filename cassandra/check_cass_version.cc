@@ -1,8 +1,15 @@
-#include <cassandra.h>
 /* Use "#include <dse.h>" when connecting to DataStax Enterpise */
 #include <stdio.h>
+#include <iostream>
+
+#include <cassandra.h>
 
 #include "connect_cass.h"
+
+using std::cout;
+using std::endl;
+
+// using namespace std;
 
 int main(int argc, char *argv[]) {
     /* Setup and connect to cluster */
@@ -47,6 +54,9 @@ int main(int argc, char *argv[]) {
                 size_t release_version_length;
                 cass_value_get_string(value, &release_version, &release_version_length);
                 printf("release_version: '%.*s'\n", (int)release_version_length, release_version);
+                cout << "release_version: "
+                    << release_version
+                    << endl;
             }
 
             cass_result_free(result);

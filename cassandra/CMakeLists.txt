@@ -19,9 +19,13 @@ if(CASS_LIB)
     message("Cassandra library executable found at - ${CASS_LIB}")
 endif()
 
-add_executable(cassandra_integration check_cass_version.cc)
-target_include_directories(cassandra_integration PUBLIC ${CASS_H})
-target_link_libraries(cassandra_integration ${CASS_LIB})
+add_executable(check_cass_version check_cass_version.cc)
+target_include_directories(check_cass_version PUBLIC ${CASS_H})
+target_link_libraries(check_cass_version ${CASS_LIB})
+
+add_executable(insert_cass insert_cass.cc)
+target_include_directories(insert_cass PUBLIC ${CASS_H})
+target_link_libraries(insert_cass ${CASS_LIB})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
