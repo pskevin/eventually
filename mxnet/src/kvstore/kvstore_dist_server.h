@@ -50,12 +50,22 @@ enum class CommandType {
 };
 
 enum class RequestType {
-  kDefaultPushPull, kRowSparsePushPull, kCompressedPushPull
+  kDefaultPushPull, kRowSparsePushPull, kCompressedPushPull,
+  kReplicaPush, kReplicaPull, kReplicaPushReply, kReplicaPullReply
 };
 
 struct DataHandleType {
   RequestType requestType;
   int dtype;
+};
+
+/**
+ * \brief struct for ps keys and lens
+ */
+struct PSKV {
+  ps::SArray<ps::Key> keys;  // n keys
+  ps::SArray<int> lens;  // the length of the i-th value
+  int size;
 };
 
 /*!
@@ -337,12 +347,106 @@ class KVStoreDistServer {
       case RequestType::kDefaultPushPull:
         DataHandleDefault(type, req_meta, req_data, server);
         break;
+      case RequestType::kReplicaPull:
+        DataHandleReplicaPull(type, req_meta, req_data, server);
+        break;
+      case RequestType::kReplicaPush:
+        DataHandleReplicaPush(type, req_meta, req_data, server);
+        break;
     }
   }
 
   inline bool has_multi_precision_copy(const DataHandleType type) {
     return multi_precision_ && type.dtype != mshadow::kFloat32;
   }
+
+  void DataHandleReplicaPull(const DataHandleType type, const ps::KVMeta& req_meta,
+                         const ps::KVPairs<char> &req_data,
+                         ps::KVServer<char>* server) {
+    int key = req_data.keys[0];
+    auto& stored = store_[key];
+    auto& clocked = clock_[key];
+    if (stored.is_none() && clocked.is_none()) {
+      std::cout<<"Server "<<ps::MyRank()<<" does not have key "<<key<<" stored&clocked for pull replica"<<std::endl;
+      return;
+    } else if(stored.is_none() || clocked.is_none()) {
+      std::cout<<"Server "<<ps::MyRank()<<" does not have key "<<key<<" either stored or clocked for pull replica"<<std::endl;
+      return;
+    }
+    std::cout<<"Server "<<ps::MyRank()<<"handling replicapull for "<<key<<std::endl;
+    auto getNewMeta = [this, req_meta, key]() {
+      ps::KVMeta new_req = req_meta;
+      int num_workers = ps::Postoffice::Get()->num_workers();
+      auto& global_nd_clock = clock_[key];
+        std::cout<<"Do pull size in pull handle replica"<<std::endl;
+      int* cdata = static_cast<int*>(global_nd_clock.data().dptr_);
+      auto global_ps_clock = new ps::SArray<int>(cdata, num_workers, false);
+      for (int i=0; i<global_ps_clock->size(); i++) {
+        new_req.server_epochs[i] = (*global_ps_clock)[i];
+      }
+      new_req.cmd = GetCommandType(RequestType::kReplicaPullReply, store_[key].dtype());
+      return new_req;
+    };
+    const ps::KVMeta new_req = getNewMeta();
+    std::cout<<"server "<<ps::MyRank()<<" sending replica pull reply for key "<<key<<std::endl;
+    DefaultStorageResponse(type, key, new_req, req_data, server);
+  }
+
+  void DataHandleReplicaPush(const DataHandleType type, const ps::KVMeta& req_meta,
+                         const ps::KVPairs<char> &req_data,
+                         ps::KVServer<char>* server) {
+    // do some check
+    CHECK_EQ(req_data.keys.size(), (size_t)1);
+    if (req_meta.push) {
+      CHECK_EQ(req_data.lens.size(), (size_t)1);
+      CHECK_EQ(req_data.vals.size(), (size_t)req_data.lens[0]);
+    }
+    int key = req_data.keys[0];
+    auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
+    auto& global_nd_clock = clock_[key];
+    std::cout<<"Server "<<ps::MyRank()<<"handling replicapush for "<<key<<std::endl;
+
+    size_t ds[] = {(size_t) req_data.lens[0] / mshadow::mshadow_sizeof(type.dtype)};
+    mxnet::TShape dshape(ds, ds + 1);
+    TBlob recv_blob;
+    MSHADOW_REAL_TYPE_SWITCH(type.dtype, DType, {
+      recv_blob = TBlob(reinterpret_cast<DType*>(req_data.vals.data()), dshape, cpu::kDevMask);
+    })
+    NDArray recved = NDArray(recv_blob, 0);
+
+    mxnet::TShape tshape(1,ps::Postoffice::Get()->num_workers());
+    TBlob clock_blob;
+    clock_blob = TBlob(reinterpret_cast<int*>(req_meta.server_epochs.data()), tshape, cpu::kDevMask);
+    NDArray recved_clock = NDArray(clock_blob, 0);
+    if (stored.is_none()) {
+      // initialization
+      stored = NDArray(dshape, Context(), false,
+                        has_multi_precision_copy(type) ? mshadow::kFloat32 : type.dtype);
+      global_nd_clock = NDArray(tshape, Context(), false, mshadow::kInt32);
+      global_nd_clock = 0;
+    }
+    CopyFromTo(recved, &stored, 0);
+    CopyFromTo(recved_clock, &global_nd_clock, 0);
+    int cmd = GetCommandType(RequestType::kReplicaPushReply, store_[key].dtype());
+    std::cout<<"push reply cmd is "<<cmd<<std::endl;
+    auto getNewMeta = [this, req_meta, cmd]() {
+      ps::KVMeta new_req = req_meta;
+      new_req.cmd = cmd;
+      return new_req;
+    };
+    const ps::KVMeta new_req = getNewMeta();
+    server->Response(new_req);
+    if (has_multi_precision_copy(type)) {
+      auto& stored_dtype = store_[key];
+      stored_dtype = NDArray(dshape, Context(), false, type.dtype);
+      CopyFromTo(stored, stored_dtype);
+      stored_dtype.WaitToRead();
+    }
+    stored.WaitToRead();
+    std::cout<<"server "<<ps::MyRank()<<" sending replica push reply for key "<<key<<std::endl;
+    // DefaultStorageResponse(type, key, req_meta, req_data, server);
+  }
+
 
   inline void ApplyUpdates(const DataHandleType type, const int key,
                            const ps::KVPairs<char>& req_data, UpdateBuf *update_buf,
@@ -352,88 +456,222 @@ class KVStoreDistServer {
       // let the main thread to execute updater_, which is necessary for python
       auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
       auto& update =  sync_mode_ ? update_buf->merged : update_buf->temp_array;
-      auto& clocked = clock_[key];
+      auto& global_nd_clock = clock_[key];
       auto& requests = update_buf->request;
-      size_t csize = clocked.shape().Size();
-      int* cdata = static_cast<int*>(clocked.data().dptr_);
-      auto clock_vals = new ps::SArray<int>(cdata, csize, false);
+      auto requests_val = update_buf->request;
+        std::cout<<"Do apply updates size"<<std::endl;
+      size_t csize = global_nd_clock.shape().Size();
+      int* cdata = static_cast<int*>(global_nd_clock.data().dptr_);
+      auto global_ps_clock = new ps::SArray<int>(cdata, csize, false);
+
       int num_workers = ps::Postoffice::Get()->num_workers();
-      auto local_clock = new std::vector<int>(num_workers);
+      auto local_ps_clock = new std::vector<int>(num_workers);
+      // NDArray local_nd_clock = NDArray(global_nd_clock.shape(), Context(), false, mshadow::kInt32);
+      // CopyFromTo(global_nd_clock, &local_nd_clock, 0);
+      // int* clocaldata = static_cast<int*>(local_nd_clock.data().dptr_);
+      // auto local_ps_clock = new ps::SArray<int>(clocaldata, csize, false);
+
+      // NDArray local_nd_store = NDArray(stored.shape(), Context(), false,
+                        //  has_multi_precision_copy(type) ? mshadow::kFloat32 : type.dtype);
 
       if (updater_) {
-        exec_.Exec([this, key, &update, &stored, &requests, clock_vals, local_clock, num_workers]() mutable {
+        exec_.Exec([this, key, &update, &stored, &requests, global_ps_clock, local_ps_clock, num_workers]() mutable {
           int staleness = 0;
           for (const auto& req : requests) {
             int worker = req.rank;
             // std::cout<<"For worker "<<worker<<std::endl;
             for (int i=0; i<num_workers; i++) {
-              // std::cout<<"server, worker clock: "<< (*clock_vals)[i] << ", " << req.server_epochs[i]<<std::endl;
-              staleness += (*clock_vals)[i] - req.server_epochs[i];
+              // std::cout<<"server, worker clock: "<< (*global_ps_clock)[i] << ", " << req.server_epochs[i]<<std::endl;
+              staleness += (*global_ps_clock)[i] - req.server_epochs[i];
             }
             // std::cout<<"Cumulative staleness for worker "<<worker<<": "<<staleness<<std::endl;
           }
           for (const auto& req : requests) {
             int worker = req.rank;
-            (*clock_vals)[worker] = req.epoch + 1;
+            (*global_ps_clock)[worker] = req.epoch + 1;
           }
           for (int i=0; i<num_workers; i++) {
-            (*local_clock)[i] = (*clock_vals)[i];
+            (*local_ps_clock)[i] = (*global_ps_clock)[i];
           }
           // TODO Divide update by staleness here.
           CHECK(updater_);
           updater_(key, update, &stored);
+          // CopyFromTo(stored, &local_nd_store, 0);
         });
       } else {
         CHECK(sync_mode_) << "Updater needs to be set for async mode";
         // if no updater, just copy
         CopyFromTo(update_buf->merged, &stored);
       }
-
-      if (log_verbose_)  {
-        LOG(INFO) << "sent response to " << update_buf->request.size() << " workers";
-      }
-      /**
-       * Request can be for either push, pull or pushpull
-       * If pull flag is set, respond immediately with the updated values
-       * Otherwise, only send the notification
-       */
-      bool has_pull = false;
-      for (const auto& req : update_buf->request) {
-        has_pull = has_pull || req.pull;
-      }
-      if (has_pull) {
-        // if there is a pull request, perform WaitToRead() once before DefaultStorageResponse
-        if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
-        stored.WaitToRead();
-        // std::cout<<"New vector clock [";
-        for (int i=0; i<num_workers; i++) {
-          // std::cout<<(*local_clock)[i]<<" ";
-        }
-        // std::cout<<"]"<<std::endl;
-        for (const auto& req : update_buf->request) {
-          if (req.pull) {
-            auto getNewMeta = [this, req, num_workers, local_clock]() {
-              ps::KVMeta new_req = req;
-              for (int i=0; i<num_workers; i++) {
-                new_req.server_epochs[i] = (*local_clock)[i];
-              }
-              return new_req;
-            };
-            const ps::KVMeta new_req = getNewMeta();
-            // std::cout<<"Sending updated value of clock"<<std::endl;
-            DefaultStorageResponse(type, key, new_req, req_data, server);
+      
+      // auto& replica_push_reply_buf = reply_push_buf[key];
+      // replica_push_reply_buf->replies.clear();
+      // Push to server replicas
+      exec_.Exec([this, key, update_buf, stored, requests_val,
+        global_nd_clock, local_ps_clock, num_workers, server, type, req_data]() mutable {
+        int priority = 0;
+        auto push_to_servers =
+        [key, stored, server, global_nd_clock](RunContext rctx, Engine::CallbackOnComplete cb) {
+          const int dtype = stored.dtype();
+          size_t size = stored.shape().Size() * mshadow::mshadow_sizeof(dtype);
+          std::cout<<"Do push size "<<size<<std::endl;
+          char* data = static_cast<char *> (stored.data().dptr_);
+          const int num_bytes = mshadow::mshadow_sizeof(dtype);
+          if(data==nullptr) {
+            std::cout<<"bad"<<std::endl;
           }
-        }
-        update_buf->request.clear();
-      } else {
-        // otherwise, send response directly
-        for (const auto& req : update_buf->request) {
-          server->Response(req);
-        }
-        update_buf->request.clear();
-        if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
-        stored.WaitToRead();
-      }
+          ps::SArray<char> local_ps_store(data, size, false);
+
+          size_t sesize = global_nd_clock.shape().Size();
+          int* sedata = static_cast<int*>(global_nd_clock.data().dptr_);
+          ps::SArray<int> local_ps_clock(sedata, sesize, false);
+
+          ps::KVPairs<char> kvs;
+          std::cout<<"Sending key "<<key<<std::endl;
+          kvs.keys.push_back(key);
+          kvs.lens.push_back(size);
+          kvs.vals = local_ps_store;
+          kvs.priority = 0;
+          int cmd = GetCommandType(RequestType::kReplicaPush, dtype);
+          // TODO: cb does the return after reply
+          CHECK_NOTNULL(server)->ServerPush(kvs, cmd, [cb]() {std::cout<<"Did push to servers from servers"<<std::endl; cb(); }, local_ps_clock, -1, ps::MyRank());
+        };
+        Engine::Get()->PushAsync(
+          push_to_servers,
+          Context(),
+          {global_nd_clock.var()},
+          {stored.var()},
+          FnProperty::kNormal,
+          priority,
+          "KVStoreDistServerPush");
+
+
+        auto pull_from_servers =
+        [key, stored, global_nd_clock, server](RunContext rctx, Engine::CallbackOnComplete cb) {
+          const int dtype = stored.dtype();
+          size_t size = stored.shape().Size() * mshadow::mshadow_sizeof(dtype);
+          std::cout<<"Do pull size "<<size<<std::endl;
+          char* data = static_cast<char *> (stored.data().dptr_);
+          PSKV n;
+          PSKV& pskv = n;
+          pskv.keys.push_back(key);
+          pskv.lens.push_back(size);
+          auto local_ps_store = new ps::SArray<char>(data, size, false);
+          int cmd = GetCommandType(RequestType::kReplicaPull, dtype);
+          // TODO: cb does the return after reply
+          size_t sesize = global_nd_clock.shape().Size();
+          int* sedata = static_cast<int*>(global_nd_clock.data().dptr_);
+          auto local_ps_clock = new ps::SArray<int>(sedata, sesize, false);
+          CHECK_NOTNULL(server)->ServerPull(pskv.keys, local_ps_store, nullptr, cmd,
+          [local_ps_store, local_ps_clock, cb]() {std::cout<<"Finished pull to servers from servers"<<std::endl; delete local_ps_store, delete local_ps_clock, cb(); },
+          0, *local_ps_clock, local_ps_clock, -1, ps::MyRank());
+        };
+        // Engine::Get()->Push(Engine::Get()->NewOperator(
+        //   pull_from_servers,
+        //   {},
+        //   {local_nd_clock.var(), local_nd_store.var()}),
+        //   Context(),
+        //   priority,
+        //   false);
+        Engine::Get()->PushAsync(
+          pull_from_servers,
+          Context(),
+          {},
+          {stored.var(), global_nd_clock.var()},
+          FnProperty::kNormal,
+          priority,
+          "KVStoreDistServerPull");
+
+        std::cout<<"will be sending response to worker now"<<std::endl;
+
+        auto send_worker_reply = 
+        [this, update_buf, stored, requests_val, global_nd_clock, server, key,  req_data, num_workers, type](RunContext rctx, Engine::CallbackOnComplete cb) {
+          if (log_verbose_)  {
+            LOG(INFO) << "sent response to " << requests_val.size() << " workers";
+          }
+          // std::cout<<"1A "<<key<<std::endl;
+          // CopyFromTo(local_nd_store, &stored, 0);
+          // std::cout<<"1B "<<key<<std::endl;
+          // CopyFromTo(local_nd_clock, &global_nd_clock, 0);
+          // std::cout<<"1C "<<key<<std::endl;
+          /**
+           * Request can be for either push, pull or pushpull
+           * If pull flag is set, respond immediately with the updated values
+           * Otherwise, only send the notification
+           */
+          bool has_pull = false;
+
+          for (const auto& req : requests_val) {
+            has_pull = has_pull || req.pull;
+          }
+          std::cout<<"1CC "<<key<<" "<<has_pull<<std::endl;
+          if (has_pull) {
+            // if there is a pull request, perform WaitToRead() once before DefaultStorageResponse
+            // if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
+            // local_nd_store.WaitToRead();
+          std::cout<<"1D "<<key<<std::endl;
+
+            for (const auto& req : requests_val) {
+
+          std::cout<<"1E "<<key<<std::endl;
+              if (req.pull) {
+          std::cout<<"1F "<<key<<std::endl;
+                size_t sesize = global_nd_clock.shape().Size();
+                int* sedata = static_cast<int*>(global_nd_clock.data().dptr_);
+                auto local_ps_clock = new ps::SArray<int>(sedata, sesize, false);
+                auto getNewMeta = [this, req, num_workers, local_ps_clock]() {
+                  ps::KVMeta new_req = req;
+                  for (int i=0; i<num_workers; i++) {
+                    new_req.server_epochs[i] = (*local_ps_clock)[i];
+                  }
+                  return new_req;
+                };
+                const ps::KVMeta new_req = getNewMeta();
+          std::cout<<"1G "<<key<<std::endl;
+                std::cout<<"Sending to worker key "<<key<<std::endl;
+                ps::KVPairs<char> response;
+                CHECK(!stored.is_none()) << "init " << key << " first";
+
+                // as server returns when store_realt is ready in this case
+                if (has_multi_precision_copy(type)) stored.WaitToRead();
+                std::cout<<"Creating response for key "<<key<<std::endl;
+                auto len = stored.shape().Size() * mshadow::mshadow_sizeof(stored.dtype());
+                response.keys = req_data.keys;
+                response.lens = {len};
+                // TODO(mli) try to remove this CopyFrom
+                response.vals.CopyFrom(static_cast<const char*>(stored.data().dptr_), len);
+                server->Response(new_req, response);
+              }
+            }
+            update_buf->request.clear();
+          } else {
+            // otherwise, send response directly
+            for (const auto& req : requests_val) {
+              server->Response(req);
+            }
+            update_buf->request.clear();
+            // if (has_multi_precision_copy(type)) CopyFromTo(stored, store_[key]);
+            stored.WaitToRead();
+          }
+        };
+        // Sending via engine because we want serialization
+        // wait for pull to finish before sending reply to worker
+        Engine::Get()->Push(Engine::Get()->NewOperator(
+          send_worker_reply,
+          {},
+          {global_nd_clock.var(), stored.var()}),
+          Context(),
+          priority,
+          false);     
+        // Engine::Get()->PushAsync(
+        //   send_worker_reply,
+        //   Context(),
+        //   {},
+        //   {local_nd_store.var(), local_nd_clock.var()},
+        //   FnProperty::kNormal,
+        //   priority,
+        //   "KVStoreDistServerPull");
+      });
     } else {
       update_buf->merged.WaitToRead();
     }
@@ -655,7 +893,7 @@ class KVStoreDistServer {
 
     // as server returns when store_realt is ready in this case
     if (has_multi_precision_copy(type)) stored.WaitToRead();
-
+    std::cout<<"Do defaultstorafe size"<<std::endl;
     auto len = stored.shape().Size() * mshadow::mshadow_sizeof(stored.dtype());
     response.keys = req_data.keys;
     response.lens = {len};
@@ -744,7 +982,7 @@ class KVStoreDistServer {
     }
     int key = DecodeKey(req_data.keys[0]);
     auto& stored = has_multi_precision_copy(type) ? store_realt_[key] : store_[key];
-    auto& clocked = clock_[key];
+    auto& global_nd_clock = clock_[key];
 
     // there used several WaitToRead, this is because \a recved's memory
     // could be deallocated when this function returns. so we need to make sure
@@ -766,8 +1004,8 @@ class KVStoreDistServer {
                          has_multi_precision_copy(type) ? mshadow::kFloat32 : type.dtype);
         CopyFromTo(recved, &stored, 0);
         TShape tshape = TShape(1,ps::Postoffice::Get()->num_workers());
-        clocked = NDArray(tshape, Context(), false, mshadow::kInt32);
-        clocked = 0;
+        global_nd_clock = NDArray(tshape, Context(), false, mshadow::kInt32);
+        global_nd_clock = 0;
         server->Response(req_meta);
         if (has_multi_precision_copy(type)) {
           auto& stored_dtype = store_[key];
@@ -835,10 +1073,14 @@ class KVStoreDistServer {
   std::unordered_map<int, NDArray> store_realt_;
 
   /**
+   * \brief replica_store_ contains the value at each replicated kvstore for current key
+   */  
+  std::unordered_map<int, NDArray> replica_store_;
+
+  /**
    * \brief clock_ contains the value of last serviced worker iteration
    */
   std::unordered_map<int, NDArray> clock_;
-  // ps::SArray<int> clock_;
 
   /**
    * \brief merge_buf_ is a buffer used if sync_mode is true. It represents

@@ -200,6 +200,7 @@ struct Meta {
   SArray<int> server_epochs = {};
   int epoch = 0;
   int rank = 0;
+  // SArray<int> pref = {};
 };
 /**
  * \brief messages that communicated amaong nodes.

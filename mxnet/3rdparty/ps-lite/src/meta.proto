@@ -61,6 +61,8 @@ message PBMeta {
   optional int32 epoch = 14 [default = 0];
   // server epochs
   repeated int32 server_epochs = 15 [packed=true];
+  // TODO reduce number of fields sent
   // worker rank
   optional int32 rank = 16;
+  // repeated int32 pref = 17 [packed=true];
 }

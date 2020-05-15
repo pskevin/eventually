@@ -44,6 +44,29 @@ struct KVPairs {
   int priority = 0;
 };
 
+enum class RequestType {
+  kDefaultPushPull, kRowSparsePushPull, kCompressedPushPull,
+  kReplicaPush, kReplicaPull, kReplicaPushReply, kReplicaPullReply
+};
+
+struct DataHandleType {
+  RequestType requestType;
+  int dtype;
+};
+
+static DataHandleType DepairDataHandleType(int cmd) {
+  int w = std::floor((std::sqrt(8 * cmd + 1) - 1)/2);
+  int t = ((w * w) + w) / 2;
+  int y = cmd - t;
+  int x = w - y;
+  CHECK_GE(x, 0);
+  CHECK_GE(y, 0);
+  DataHandleType type;
+  type.requestType = static_cast<RequestType>(x);
+  type.dtype = y;
+  return type;
+}
+
 /**
  * \brief A worker node that can \ref Push (\ref Pull) key-value pairs to (from) server
  * nodes
@@ -408,6 +431,7 @@ struct KVMeta {
 template <typename Val>
 class KVServer : public SimpleApp {
  public:
+  using Callback = std::function<void()>;
   /**
    * \brief constructor
    * \param app_id the app id, should match with \ref KVWorker's id
@@ -441,11 +465,77 @@ class KVServer : public SimpleApp {
    */
   void Response(const KVMeta& req, const KVPairs<Val>& res = KVPairs<Val>());
 
+  int ServerPush(KVPairs<Val> kvs,
+            int cmd = 0,
+            const Callback& cb = nullptr,
+            const SArray<int>& server_epochs = {},
+            int epoch = 0, int rank = 0) {
+    int ts = obj_->NewRequest(kServerGroup);
+    AddCallback(ts, cb);
+    std::cout<<"push ts: "<<ts<<" key:"<<kvs.keys[0]<<std::endl;
+    Send(ts, true, false, cmd, kvs, server_epochs, epoch, rank);
+    return ts;
+  }
+
+  int ServerPull(const SArray<Key>& keys,
+            SArray<Val>* vals,
+            SArray<int>* lens = nullptr,
+            int cmd = 0,
+            const Callback& cb = nullptr,
+            int priority = 0,
+            const SArray<int>& server_epochs = {},
+            SArray<int>* out_server_epochs = {},
+            int epoch = 0, int rank = 0) {
+    int ts = AddPullCB(keys, vals, lens, cmd, cb, out_server_epochs);
+    std::cout<<"pull ts: "<<ts<<" key:"<<keys[0]<<std::endl;
+    KVPairs<Val> kvs;
+    kvs.keys = keys;
+    kvs.priority = priority;
+    Send(ts, false, true, cmd, kvs, server_epochs, epoch, rank);
+    return ts;
+  }
+
  private:
   /** \brief internal receive handle */
   void Process(const Message& msg);
   /** \brief request handle */
   ReqHandle request_handle_;
+  /**
+   * \brief internal pull, C/D can be either SArray or std::vector
+   */
+  template <typename C, typename D>
+  int AddPullCB(const SArray<Key>& keys, C* vals, D* lens,
+            int cmd, const Callback& cb, SArray<int>* server_epochs = {});
+  void Send(int timestamp, bool push, bool pull, int cmd, const KVPairs<Val>& kvs, const SArray<int>& server_epochs = {}, int epoch = 0, int rank = 0);
+  /**
+   * \brief add a callback for a request. threadsafe.
+   * @param cb callback
+   * @param timestamp the timestamp of the request
+   */
+  void AddCallback(int timestamp, const Callback& cb) {
+    if (!cb) return;
+    std::lock_guard<std::mutex> lk(mu_);
+    callbacks_[timestamp] = cb;
+  }
+
+  /**
+   * \brief run and delete the callback
+   * \param timestamp the timestamp of the callback
+   */
+  void RunCallback(int timestamp);
+  /**
+   * \brief send the kv list to all servers
+   * @param timestamp the timestamp of the request
+   * @param push whether or not it is a push request
+   * @param push whether or not it is a pull request
+   * @param cmd command
+   */
+  /** \brief callbacks for each timestamp */
+  std::unordered_map<int, Callback> callbacks_;
+  std::unordered_map<int, std::vector<KVPairs<Val>>> good_recv_;
+  std::unordered_map<int, std::vector<SArray<int>>> good_epochs_;
+  /** \brief lock */
+  std::mutex mu_;
 };
 
 
@@ -485,7 +575,7 @@ void KVServer<Val>::Process(const Message& msg) {
   if (msg.meta.simple_app) {
     SimpleApp::Process(msg); return;
   }
-  // std::cout<<"Reached until Process of KVServer"<<std::endl;
+  std::cout<<"Server "<<msg.meta.recver<<" processing cmd="<<msg.meta.head<<" ts="<<msg.meta.timestamp<<std::endl;
   KVMeta meta;
   meta.cmd       = msg.meta.head;
   meta.push      = msg.meta.push;
@@ -496,6 +586,7 @@ void KVServer<Val>::Process(const Message& msg) {
   meta.epoch      = msg.meta.epoch;
   meta.rank       = msg.meta.rank;
   meta.server_epochs = msg.meta.server_epochs;
+  int ts = msg.meta.timestamp;
   KVPairs<Val> data;
   int n = msg.data.size();
   if (n) {
@@ -508,8 +599,35 @@ void KVServer<Val>::Process(const Message& msg) {
       CHECK_EQ(data.lens.size(), data.keys.size());
     }
   }
+  std::cout<<"Process midway"<<std::endl;
+  int num_writers=1;//Postoffice::Get()->num_writers() - 1
+  int num_readers=1;
+  if (DepairDataHandleType(meta.cmd).requestType == RequestType::kReplicaPullReply) {
+    std::cout<<"Received a pull reply"<<std::endl;
+    SArray<int> sepochs = meta.server_epochs;
+    mu_.lock();
+    good_recv_[ts].push_back(data);
+    if(sepochs.size()) {
+      good_epochs_[ts].push_back(sepochs);
+    }
+    mu_.unlock();
+    if (obj_->NumResponse(ts) == num_readers) {
+      std::cout<<"Received necessary pull replies "<<ts<<" for some key, cmd="<<meta.cmd<<std::endl;
+      RunCallback(ts);
+    }
+  }
+    // finished, run callbacks
+  // std::cout<<"Received cmd "<<meta.cmd<<std::endl;
+  if ((DepairDataHandleType(meta.cmd).requestType == RequestType::kReplicaPushReply)
+      && (obj_->NumResponse(ts) == num_writers) )  {
+    std::cout<<"Received necessary push replies "<<ts<<" for some key, cmd="<<meta.cmd<<std::endl;
+    RunCallback(ts);
+  }
+  std::cout<<"Process calling request handler"<<std::endl;
+
   CHECK(request_handle_);
   request_handle_(meta, data, this);
+  std::cout<<"Process finished request handler"<<std::endl;
 }
 
 template <typename Val>
@@ -537,7 +655,46 @@ void KVServer<Val>::Response(const KVMeta& req, const KVPairs<Val>& res) {
   }
   // std::cout<<"S Response3"<<std::endl;
   Postoffice::Get()->van()->Send(msg);
-  // std::cout<<"S Response4"<<std::endl;
+}
+
+template <typename Val>
+void KVServer<Val>::Send(int timestamp, bool push, bool pull, int cmd, const KVPairs<Val>& kvs,
+                        const SArray<int>& server_epochs, int epoch, int rank) {
+  // CHECK_EQ(DepairDataHandleType(cmd).requestType,RequestType::kReplicaPush);
+  int num_replicas = ps::Postoffice::Get()->num_replicas();
+  int base = (rank/num_replicas) * num_replicas;
+  std::cout<<"Server About to Send from "<<rank<<" ts="<<timestamp<<std::endl;
+
+  for (size_t i = base; i < base+num_replicas; ++i) {
+    std::cout<<"Server Sending from "<<rank<<"->"<<i<<" ts="<<timestamp<<std::endl;
+    if (i == rank)
+      continue;
+    Message msg;
+    msg.meta.app_id = obj_->app_id();
+    msg.meta.customer_id = obj_->customer_id();
+    msg.meta.request     = true;
+    msg.meta.push        = push;
+    msg.meta.pull        = pull;
+    msg.meta.head        = cmd;
+    msg.meta.timestamp   = timestamp;
+    msg.meta.recver      = Postoffice::Get()->ServerRankToID(i);
+    msg.meta.priority    = kvs.priority;
+    msg.meta.server_epochs = server_epochs;
+    msg.meta.epoch        = epoch;
+    msg.meta.rank         = rank;
+    // msg.meta.pref         = pref;
+    // const auto& kvs = s.second;
+    if (kvs.keys.size()) {
+      msg.AddData(kvs.keys);
+      msg.AddData(kvs.vals);
+      if (kvs.lens.size()) {
+        msg.AddData(kvs.lens);
+      }
+    }
+    std::cout<<"Server Send from "<<rank<<"->"<<i<<" ts="<<timestamp<<std::endl;
+    Postoffice::Get()->van()->Send(msg);
+
+  }
 }
 
 template <typename Val>
@@ -630,6 +787,7 @@ void KVWorker<Val>::Send(int timestamp, bool push, bool pull, int cmd, const KVP
     msg.meta.server_epochs = server_epochs;
     msg.meta.epoch        = epoch;
     msg.meta.rank         = rank;
+    // msg.meta.pref         = pref;
     const auto& kvs = s.second;
     if (kvs.keys.size()) {
       msg.AddData(kvs.keys);
@@ -713,6 +871,16 @@ int KVWorker<Val>::AddPullCB(
       // std::cout<<"AddPullCB exec3"<<std::endl;
       mu_.unlock();
 
+      // std::cout<<"W Sent Keys"<<std::endl;
+      for (int i=0; i<keys.size(); i++)
+        std::cout<<keys[i]<<std::endl;
+      // std::cout<<"S Sent to W keys"<<std::endl;
+      for (const auto& s : kvs) {
+        // std::cout<<"1"<<std::endl;
+        for (int i=0; i<s.keys.size(); i++)
+          std::cout<<s.keys[i]<<std::endl;
+      }
+      // std::cout<<"Done"<<std::endl;
 
       // do check
       size_t total_key = 0, total_val = 0;
@@ -780,6 +948,132 @@ int KVWorker<Val>::AddPullCB(
       mu_.unlock();
       if (cb) cb();
       // std::cout<<"AddPullCB execN"<<std::endl;
+    });
+
+  return ts;
+}
+
+template <typename Val>
+void KVServer<Val>::RunCallback(int timestamp) {
+  mu_.lock();
+  auto it = callbacks_.find(timestamp);
+  if (it != callbacks_.end()) {
+    mu_.unlock();
+
+    CHECK(it->second);
+    it->second();
+
+    mu_.lock();
+    callbacks_.erase(it);
+  }
+  mu_.unlock();
+}
+
+template <typename Val>
+template <typename C, typename D>
+int KVServer<Val>::AddPullCB(
+    const SArray<Key>& keys, C* vals, D* lens, int cmd,
+    const Callback& cb, SArray<int>* server_epochs) {
+  int ts = obj_->NewRequest(kServerGroup);
+  AddCallback(ts, [this, ts, keys, vals, lens, cb, server_epochs]() mutable {
+      std::cout<<"Selecting from received values"<<std::endl;
+      mu_.lock();
+      auto& kvs = good_recv_[ts];
+      auto& sepochs = good_epochs_[ts];
+      mu_.unlock();
+      // std::cout<<"Selecting got items"<<std::endl;
+
+
+
+      // do check that key is the same
+      size_t total_key = 0, total_val = 0;
+      auto firstkvs = kvs[0];
+      for (const auto& s : kvs) {
+        for (int i=0; i<s.keys.size(); i++) {
+          CHECK_EQ(firstkvs.keys[i], s.keys[i]);
+        }
+        
+        if (lens) CHECK_EQ(s.lens.size(), s.keys.size());
+        total_key = s.keys.size();
+        total_val = s.vals.size();
+      }
+      CHECK_EQ(total_key, keys.size()) << "lost some servers?";
+      // std::cout<<"Selecting checked keys"<<std::endl;
+
+
+      CHECK_NOTNULL(vals);
+      // std::cout<<"Selecting 1"<<std::endl;
+      if (vals->empty()) {
+        vals->resize(total_val);
+        // std::cout<<"Selecting 2"<<std::endl;
+      } else {
+        CHECK_EQ(vals->size(), total_val);
+        // std::cout<<"Selecting 3"<<std::endl;
+      }
+      // std::cout<<"Selecting 4"<<std::endl;
+      Val* p_vals = vals->data();
+      // std::cout<<"Selecting 5"<<std::endl;
+      int *p_lens = nullptr;
+      // std::cout<<"Selecting 6"<<std::endl;
+      if (lens) {
+        if (lens->empty()) {
+          lens->resize(keys.size());
+          // std::cout<<"Selecting 7"<<std::endl;
+        } else {
+          CHECK_EQ(lens->size(), keys.size());
+          // std::cout<<"Selecting 8"<<std::endl;
+        }
+        // std::cout<<"Selecting 9"<<std::endl;
+        p_lens = lens->data();
+      } else {
+        // std::cout<<"Selecting nothing"<<std::endl;
+      }
+      // std::cout<<"Selecting intialized"<<std::endl;
+
+      int max_sum = 0, latest_server = -1, count=0;
+      for(const auto& s : sepochs) {
+        int sum = 0;
+        for (int i = 0; i<s.size(); i++) {
+          sum+=s[i];
+        }
+        if (sum>=max_sum) {
+          latest_server = count;
+          sum = max_sum;
+        }
+        count++;
+      }
+
+      int server_sum=0;
+      for (int i=0; i<server_epochs->size(); i++){
+        server_sum+=(*server_epochs)[i];
+      }
+
+      std::cout<<"Selecting: serversum "<<server_sum<<" max: "<<max_sum<<std::endl;
+
+      if (max_sum>server_sum && latest_server!=-1) {
+         memcpy(p_vals, kvs[latest_server].vals.data(), kvs[latest_server].vals.size() * sizeof(Val));
+        p_vals += kvs[latest_server].vals.size();
+        if (p_lens) {
+          memcpy(p_lens, kvs[latest_server].lens.data(), kvs[latest_server].lens.size() * sizeof(int));
+          p_lens += kvs[latest_server].lens.size();
+        }
+        int* se_vals = server_epochs->data();
+        if (sepochs.size() != 0) {
+          memcpy(se_vals, sepochs[latest_server].data(), sepochs[latest_server].size() * sizeof(Val));
+          if(sepochs[latest_server].size()!=0) {
+            for (int j=0; j<sepochs[latest_server].size(); j++){
+              (*server_epochs)[j] = sepochs[latest_server][j];
+            }
+          }
+        }
+      }
+      std::cout<<"Selecting done"<<std::endl;
+
+      mu_.lock();
+      good_recv_.erase(ts);
+      good_epochs_.erase(ts);
+      mu_.unlock();
+      if (cb) cb();
     });
 
   return ts;

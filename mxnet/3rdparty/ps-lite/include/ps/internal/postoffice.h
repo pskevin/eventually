@@ -122,6 +122,8 @@ class Postoffice {
   int num_workers() const { return num_workers_; }
   /** \brief Returns the number of server nodes */
   int num_servers() const { return num_servers_; }
+    /** \brief Returns the number of replicas nodes */
+  int num_replicas() const { return num_replicas_; }
   /** \brief Returns the rank of this node in its group
    *
    * Each worker will have a unique rank within [0, NumWorkers()). So are
@@ -176,7 +178,7 @@ class Postoffice {
   std::mutex server_key_ranges_mu_;
   std::vector<Range> server_key_ranges_;
   bool is_worker_, is_server_, is_scheduler_;
-  int num_servers_, num_workers_;
+  int num_servers_, num_workers_, num_replicas_;
   std::unordered_map<int, std::unordered_map<int, bool> > barrier_done_;
   int verbose_;
   std::mutex barrier_mu_;

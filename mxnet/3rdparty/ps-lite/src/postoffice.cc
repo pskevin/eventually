@@ -21,6 +21,8 @@ void Postoffice::InitEnvironment() {
   num_workers_ = atoi(val);
   val =  CHECK_NOTNULL(Environment::Get()->find("DMLC_NUM_SERVER"));
   num_servers_ = atoi(val);
+  val = CHECK_NOTNULL(Environment::Get()->find("DMLC_NUM_REPLICA"));
+  num_replicas_ = atoi(val);
   val = CHECK_NOTNULL(Environment::Get()->find("DMLC_ROLE"));
   std::string role(val);
   is_worker_ = role == "worker";
@@ -171,8 +173,8 @@ const std::vector<Range>& Postoffice::GetServerKeyRanges() {
   if (server_key_ranges_.empty()) {
     for (int i = 0; i < num_servers_; ++i) {
       server_key_ranges_.push_back(Range(
-          kMaxKey / num_servers_ * i,
-          kMaxKey / num_servers_ * (i+1)));
+          kMaxKey / num_servers_  * i,
+          kMaxKey / num_servers_  * (i+1)));
     }
   }
   server_key_ranges_mu_.unlock();
