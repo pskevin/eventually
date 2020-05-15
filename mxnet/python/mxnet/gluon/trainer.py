@@ -407,7 +407,6 @@ class Trainer(object):
                         self._kvstore.pushpull(i, grad_list, out=param.list_data(), priority=-i, epoch=self.epoch, server_epochs=self.server_epochs[i], out_server_epochs=sepochs)
                         if (sepochs.size!=0):
                             self.server_epochs[i] = sepochs
-                            print("sepch updated", sepochs.asnumpy())
                     else:
                         self._kvstore.pushpull(i, grad_list, priority=-i)
 

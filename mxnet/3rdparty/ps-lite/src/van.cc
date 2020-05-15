@@ -491,6 +491,7 @@ void Van::PackMeta(const Meta& meta, char** meta_buf, int* buf_size) {
   pb.set_rank(meta.rank);
   for (auto d : meta.data_type) pb.add_data_type(d);
   for (auto se : meta.server_epochs) pb.add_server_epochs(se);
+  // for (auto p : meta.pref) pb.add_pref(p);
   if (!meta.control.empty()) {
     auto ctrl = pb.mutable_control();
     ctrl->set_cmd(meta.control.cmd);

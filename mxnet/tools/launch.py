@@ -34,13 +34,14 @@ def dmlc_opts(opts):
     """
     args = ['--num-workers', str(opts.num_workers),
             '--num-servers', str(opts.num_servers),
+            '--num-replicas', str(opts.num_replicas),
             '--cluster', opts.launcher,
             '--host-file', opts.hostfile,
             '--sync-dst-dir', opts.sync_dst_dir]
 
     # convert to dictionary
     dopts = vars(opts)
-    for key in ['env_server', 'env_worker', 'env']:
+    for key in ['env_server', 'env_worker', 'env_replica', 'env']:
         for v in dopts[key]:
             args.append('--' + key.replace("_", "-"))
             args.append(v)
@@ -62,6 +63,9 @@ def main():
     parser.add_argument('-s', '--num-servers', type=int,
                         help='number of server nodes to be launched, \
                         in default it is equal to NUM_WORKERS')
+    parser.add_argument('-r', '--num-replicas', type=int,
+                        help='number of replica nodes to be launched, \
+                        in default it is equal to NUM_REPLICAS')
     parser.add_argument('-H', '--hostfile', type=str,
                         help = 'the hostfile of slave machines which will run \
                         the job. Required for ssh and mpi launcher')
@@ -82,6 +86,11 @@ def main():
                         environment variable for the worker processes. This overrides values of \
                         those environment variable on the machine where this script is run from. \
                         Example OMP_NUM_THREADS:3')
+    parser.add_argument('--env-replica', action='append', default=[],
+                        help='Given a pair of environment_variable:value, sets this value of \
+                        environment variable for the worker processes. This overrides values of \
+                        those environment variable on the machine where this script is run from. \
+                        Example OMP_NUM_THREADS:3')
     parser.add_argument('--env', action='append', default=[],
                         help='given a environment variable, passes their \
                         values from current system to all workers and servers. \
@@ -97,9 +106,9 @@ def main():
         args.num_servers = args.num_workers
     if args.p3:
         args.command = ['DMLC_PS_VAN_TYPE=p3 DMLC_PS_WATER_MARK=10'] + args.command
-
+    print(args)
     args = dmlc_opts(args)
-
+    
     if args.host_file is None or args.host_file == 'None':
         if args.cluster == 'yarn':
             from dmlc_tracker import yarn
@@ -115,6 +124,7 @@ def main():
     else:
         if args.cluster == 'ssh':
             from dmlc_tracker import ssh
+            print(args)
             ssh.submit(args)
         elif args.cluster == 'mpi':
             from dmlc_tracker import mpi

@@ -123,6 +123,7 @@ class KVStore(KVStoreBase):
                 self.handle, mx_uint(len(cvkeys)), cvkeys, mx_uint(len(cokeys)), cokeys,
                 cvals, couts, ctypes.c_int(priority)))
         else:
+            print("using int keys, on the right path")
             check_call(_LIB.MXKVStoreBroadcast(
                 self.handle, mx_uint(len(cvkeys)), cvkeys, mx_uint(len(cokeys)), cokeys,
                 cvals, couts, ctypes.c_int(priority)))#, ctypes.c_int(epoch), cserver_epochs, cout_server_epochs, mx_uint(len(server_epochs)), ctypes.c_int(self.rank) ))
@@ -413,7 +414,7 @@ class KVStore(KVStoreBase):
         [ 4.  4.  4.]]
 
         """
-        # print(f"Worker: {self.rank}, epoch {epoch}, vclock {server_epochs.asnumpy()}")
+        #print(f"Worker: {self.rank}, epoch {epoch}, vclock {server_epochs.asnumpy()}")
         cvkeys, cvals, use_str_keys = _ctype_key_value(key, value)
         cserver_epochs = _ctype_ndarr(server_epochs)
         if out is not None:

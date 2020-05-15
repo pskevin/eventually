@@ -193,15 +193,12 @@ class KVStoreDist : public KVStoreLocal {
 
   void InitImpl(const std::vector<int>& keys,
                 const std::vector<NDArray>& values) override {
-                // int epoch=0,
-                // const std::vector<int>& server_epochs = std::vector<int>(),
-                // int rank=0) override {
     CheckUnique(keys);
     for (size_t i = 0; i < keys.size(); ++i) {
       InitKV(keys[i], values[i]);
     }
     if (get_rank() == 0 && this->ps_worker_->get_customer()->customer_id() == 0) {
-      Push_(keys, values, 0, false);//, epoch, server_epochs, rank);
+      Push_(keys, values, 0, false);
       // wait until the push is finished
       for (const int key : keys) {
         comm_buf_[key].WaitToWrite();
@@ -685,11 +682,14 @@ class KVStoreDist : public KVStoreLocal {
       auto krs = ps::Postoffice::Get()->GetServerKeyRanges();
       const int num_servers = krs.size();
       CHECK_GT(num_servers, 0);
+      const int num_replicas = ps::Postoffice::Get()->num_replicas();
 
       // a simple heuristic for load balance
-      if (num_arr_elems < bigarray_bound_) {
+      if (num_arr_elems < 1000*bigarray_bound_) {
         // send it to a single random picked server
-        int server = (key * 9973) % num_servers;
+        std::cout<<"selecting single server"<<std::endl;
+        // const int server = 0;
+        int server = ((key * 9973) % (num_servers/num_replicas)) * num_replicas;
         ps::Key ps_key = krs[server].begin() + key;
         CHECK_LT(ps_key, krs[server].end());
         pskv.keys.push_back(ps_key);
@@ -698,6 +698,7 @@ class KVStoreDist : public KVStoreLocal {
         pskv.size = total_bytes;
       } else {
         // parition it to all servers
+        std::cout<<"Partitions - we don't want this to happen"<<std::endl;
         pskv.size = 0;
         for (int i = 0; i < num_servers; ++i) {
           size_t part_size =
